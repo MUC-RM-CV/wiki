@@ -2,6 +2,8 @@
 
 欢迎来到 RM-CV Wiki。
 
+该仓库计划存放和 Robomaster 机甲大师对抗赛视觉/算法部分有关的内容。
+
 该网页使用 [mdBook](https://github.com/rust-lang/mdBook) 构建。
 
 ## 导航
