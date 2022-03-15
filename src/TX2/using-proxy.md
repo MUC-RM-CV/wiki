@@ -28,15 +28,25 @@
 
 笔者书写文章时，最新版本为 1.8.0，因此我们下载名为 `clash-linux-armv8-v1.8.0.gz` 的文件（压缩包）。
 
+之后，解压软件的压缩包，得到可执行程序文件。由于我们下载的为适用于 Linux 系统 + ARMv8 架构的二进制程序，因此可执行程序的名字为 `clash-linux-armv8`。
+
 > 注意：由于大部分情况下，下载过程本身需要相应的网络条件，建议先在具备网络条件的环境下载好软件后，将软件复制到 TX2 上，可以使用 U 盘也可以使用 `scp`（如果 USB 接口比较紧缺）。
 
-之后，解压软件的压缩包，得到可执行程序文件。新建一个目录，名为 `clash`，将解压得到的文件放入 `clash` 目录下。
+新建一个名为 `clash` 的目录，将解压得到的文件放入 `clash` 目录下。
+
+这里假设 `clash` 目录位于用户目录下，则最终可执行文件将位于 `~/clash/` 中。
 
 接着，进入 `clash` 目录，并为可执行程序添加执行权限。
 
 ```console
-$ cd clash
+$ cd ~/clash/
 $ chmod +x clash-linux-armv8
+```
+
+为了方便使用，可以对可执行文件的名字进行更改。这里我们将其名称修改为 `clash`。
+
+```console
+$ mv clash-linux-armv8 clash
 ```
 
 ### 获取配置文件
@@ -45,11 +55,12 @@ $ chmod +x clash-linux-armv8
 
 一种方法是直接在浏览器中访问订阅链接，在打开的页面的上下文菜单选择“另存为”，将得到的内容保存为 `config.yaml` 并存储在 `clash` 目录下。
 
-> 或者，如果是使用 SSH 远程连接的情况，直接在主机上全选网页内容，复制到粘贴板，然后用 `vi` 或 `vim` 等编辑器将内容粘贴到 `config.yaml` 文件中。
+> 如果是使用 SSH 远程连接的情况，直接在主机上全选网页内容，复制到粘贴板；之后在对应位置新建 `config.yaml` 文件，再使用 `vi` 或 `vim` 等编辑器将内容粘贴到文件中。
 
 另一种方法是使用 `wget` 命令获取订阅链接的内容。建议将订阅链接包含于一对引号 `''` 中，以便 shell 程序将其视作一个整体。
 
 ```console
+$ cd ~/.config/clash/
 $ wget -O config.yaml '订阅链接'
 ```
 
@@ -59,19 +70,30 @@ $ wget -O config.yaml '订阅链接'
 <figcaption>在终端中使用 wget 命令获取订阅链接的内容</figcaption>
 </figure>
 
+> 此外，也可以将配置文件置于用户目录下的配置文件夹中，即 `~/.config/clash/` 目录下。如果目录不存在，需要先创建对应目录。
+
 ### 运行 clash 程序
 
 之后，在终端中执行 Clash 可执行程序即可：
 
 ```console
+$ cd ~/clash/
 $ ./clash -d .
 ```
 
-也可以在后台执行 Clash 程序（详见 bash 作业控制）：
+也可以在后台执行 Clash 程序（详见 [bash 作业控制](https://tsagaanbar.github.io/Newly-Programmer-ABC/begin-programming/cli/common-commands.html#任务控制)）：
 
 ```console
+$ cd ~/clash/
 $ ./clash -d . &
 ```
+
+> 如果在上一步中将配置文件置于 `~/.config/clash/` 下，则可以直接启动 Clash 程序而无需额外的参数：
+> ```console
+> $ ~/clash/clash
+> ```
+
+启动程序后，可以访问 [Clash Dashboard](http://clash.razord.top/) 进行切换节点、测延迟等操作。
 
 ### 使用代理
 
@@ -80,8 +102,8 @@ $ ./clash -d . &
 比如，我们新建一个终端，在该次会话中增加 `http_proxy` 和 `https_proxy` 两个环境变量：
 
 ```console
-$ export http_proxy='127.0.0.1:7890'
-$ export https_proxy='127.0.0.1:7890'
+$ export http_proxy='http://127.0.0.1:7890'
+$ export https_proxy='http://127.0.0.1:7890'
 ```
 
 之后，再在这个终端中启动程序（比如 `git clone` 或者 `firefox`），一般就会使用到相应的代理配置了。
@@ -102,6 +124,10 @@ $ git clone 仓库链接
 
 [clash]: https://github.com/Dreamacro/clash
 [clash-release]: https://github.com/Dreamacro/clash/releases
+
+## 规则代理
+
+（未完待续）
 
 ## 使用局域网内其他机器上的代理
 
