@@ -9,6 +9,7 @@
 ## 导航
 
 - [基础知识](./basics/)
+    - [项目与构建](./basics/projects-and-builds.md)
     - [C++ 多文件编程](./basics/multi-files-programming.md)
 
 - [开发环境配置和使用](./tools/)
