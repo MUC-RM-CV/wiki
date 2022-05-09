@@ -2,4 +2,5 @@
 
 - [项目与构建](./projects-and-builds.md)
 - [C++ 多文件编程](./multi-files-programming.md)
+- [CMake 基本使用](./first-cmake.md)
 

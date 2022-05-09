@@ -14,11 +14,12 @@ class Date {
     int y;
     int m;
     int d;
-    auto is_leap(int year) {
+    bool is_leap(int year) {
         return (year % 4 ==0 && year % 100 != 0) || year % 400 == 0;
     }
+
 public:
-    // 类的声明中直接书写的函数也属于 inline 函数
+    // 类的声明中直接书写的函数是 inline 的
     Date(int y_, int m_, int d_) : y(y_), m(m_), d(d_) {}
 
     // 也可以只写声明，再在 cpp 文件中实现这个函数
