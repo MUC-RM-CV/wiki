@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">前言</a></li><li class="chapter-item expanded "><a href="basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basics/multi-files-programming.html"><strong aria-hidden="true">1.1.</strong> C++ 多文件编程</a></li></ol></li><li class="chapter-item expanded "><a href="tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="tools/dev-with-vcpkg-cmake-win.html"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li></ol></li><li class="chapter-item expanded "><a href="coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">前言</a></li><li class="chapter-item expanded "><a href="basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basics/projects-and-builds.html"><strong aria-hidden="true">1.1.</strong> 项目与构建</a></li><li class="chapter-item expanded "><a href="basics/multi-files-programming.html"><strong aria-hidden="true">1.2.</strong> C++ 多文件编程</a></li></ol></li><li class="chapter-item expanded "><a href="tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="tools/dev-with-vcpkg-cmake-win.html"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li></ol></li><li class="chapter-item expanded "><a href="coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -147,20 +147,11 @@
 <p>该仓库计划存放和 Robomaster 机甲大师对抗赛视觉/算法部分有关的内容。</p>
 <p>该网页使用 <a href="https://github.com/rust-lang/mdBook">mdBook</a> 构建。</p>
 <h2 id="导航"><a class="header" href="#导航">导航</a></h2>
-<!-- 可以使用如下的方式在页面中引用其他的页面 -->
-<!-- 对 *.md 文件的引用链接，会转换为对同名 *.html 的引用 -->
-<!-- 即目录下的 *.md 文件，都会被会转换为 *.html，但是 README.md 会被转换为 index.html -->
-<!-- 因此对某目录下 README 的引用，需要写作 <目录名>/index.html 或者简写作 <目录名>/ -->
-<!-- 注意 “<目录名>/” 最后的 / 不能省却，不然对应页面下相对资源的访问就会出错 -->
-<!-- 可以使用 #TAG 来引用页面下的子标题。具体的转写应参见 mdBook 生成的 HTML 中标题的链接 -->
-<!-- 以上都是针对生成 HTML 而言。但是对于普通文件系统来说，<path>/ 这样的链接是不能访问到对应文件的 -->
-<!-- 可以使用 <path>/README.md，这样转换之后变为 <path>/index.html，不影响两种情况下的访问 -->
-<!-- 但由于目前 mdBook 不会转换 *.md#TAG 这样的链接为 *.html#TAG，所以标题跳转将无法使用（会提示 404，因为输出的 HTML 里没有 md 文件） -->
-<!-- 综上所述，由于 mdBook 最终目的是生成 HTML 以供阅读，因此可以不考虑在普通文件系统上使用的情况？ -->
 <ul>
 <li>
 <p><a href="./basics/">基础知识</a></p>
 <ul>
+<li><a href="./basics/projects-and-builds.html">项目与构建</a></li>
 <li><a href="./basics/multi-files-programming.html">C++ 多文件编程</a></li>
 </ul>
 </li>
@@ -193,8 +184,46 @@
 <p>除特别注明外，项目中除代码外的部分均在 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 协议之条款下提供。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基础知识"><a class="header" href="#基础知识">基础知识</a></h1>
 <ul>
+<li><a href="basics/./projects-and-builds.html">项目与构建</a></li>
 <li><a href="basics/./multi-files-programming.html">C++ 多文件编程</a></li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="项目与构建"><a class="header" href="#项目与构建">项目与构建</a></h1>
+<p>通常, 在最开始的编程学习中, 或者日常的使用过程中, 编写的程序通常由单文件组成. 这些程序通常不会用于解决复杂的问题, 且多数如流水式描述一个问题的处理过程 (也称 &quot;脚本&quot;).</p>
+<p>而随着待解决的问题逐渐变得复杂, 程序也将变得具有多种功能以应对各种需求. 这些程序通常会包含很多模块, 程序抑或调用这些模块完成工作, 抑或与这些模块相互协作配合, 完成任务.</p>
+<p>程序调用的这些模块可能是自行编写而得, 亦有可能来自他人. 而纵观这些程序, 其中总会包含重复的部分. 而我们总是希望将这些重复的部分抽取出来, 一方面可以减少冗余, 另一方面可以方便维护.</p>
+<p>我们通常将程序使用到的这些模块称为程序的 &quot;依赖 (dependency)&quot;, 这种依赖关系可以是宏观上的经由用户界面的使用, 或者是编程层面的 API 调用, 以后一种形式被使用的依赖通常也被称作 &quot;库 (library)&quot;.</p>
+<h2 id="何为项目"><a class="header" href="#何为项目">何为项目</a></h2>
+<p>为了开发对于某个问题的解决方案, 我们通常会创建一个相应的项目. 一个项目往往会产出一个或多个可供最终使用的程序, 或者产出可被其他程序使用的 &quot;依赖&quot;; 当然, 项目也可能仅仅提供一些思路或者概念, 其概念是灵活的.</p>
+<h2 id="何为构建"><a class="header" href="#何为构建">何为构建</a></h2>
+<p>维基百科上是这样定义 &quot;构建 (build)&quot; <sup class="footnote-reference"><a href="#software-build-on-wikipedia">1</a></sup> 的:</p>
+<blockquote>
+<p>在软件开发领域, 构建 (build), 是指将源代码变成能够运行在计算机上的独立的 (standalone) 软件制品 (software artifact) 的过程; 也可以指上述过程的产物.</p>
+</blockquote>
+<p>这样说起来可能比较抽象, 用具体的例子来说, 下面的场景就可以属于 &quot;构建&quot;:</p>
+<ul>
+<li>高级语言 (如 C++) 的源代码经过编译链接等操作后, 变成目标操作系统上可执行的二进制文件;</li>
+<li>若干源文件经由 &quot;静态网站生成器 (Static Site Generator, SSG)&quot; 生成可以部署的静态网页<sup class="footnote-reference"><a href="#static-web-page">2</a></sup>;</li>
+<li>...</li>
+</ul>
+<p>结合前面的内容, 生成项目目标产物的过程, 就是构建.</p>
+<h2 id="构建工具"><a class="header" href="#构建工具">构建工具</a></h2>
+<p>对于只有单个或者几个源文件的程序, 其构建过程往往不会很复杂, 通常只需若干命令就能完成.</p>
+<p>而实际使用中, 就算只有几个文件, 其构建过程也不一定就能轻松管理.</p>
+<p>以 C++ 多文件编程 (将在之后介绍) 为例, 单是完成一次单个目标的构建就需要键入多行命令来实现. 并且, 并不是每次生成可执行程序都需要编译所有的源文件: 只编译发生变动的文件, 可以节省相当一部分时间.</p>
+<p>但是要由人工去核查每个文件是否发生变动却是很困难的事情. 且不说一个个核对文件的修改日期很容易出错, 源文件中还涉及到文件的相互包含 --- 如果一个文件发生了变化, 那么所有包含了该文件的源文件, 都需要被重新编译.</p>
+<p>此外, 实际情况中, 一个包含多个程序构建目标的项目, 各个项目之间会涉及到很多文件, 有相同的也有不同的; 如若手动完成构建过程, 将会涉及到大量的记忆以及很多命令的键入.</p>
+<p>总而言之, 这些过程对于常人来说是非常繁琐且容易出错的. 于是, 人们开发了构建工具: 只需要编写好构建工具能够读取的脚本, 描述整个项目该如何被构建 (比如哪些构建目标使用哪些文件), 构建工具就会自动完成构建过程, 生成所需的各个构建目标.</p>
+<h2 id="构建管理工具"><a class="header" href="#构建管理工具">构建管理工具</a></h2>
+<p>然而构建工具的脚本编写也是容易出错的. 此外, 有些项目可能可以使用多种构建工具进行构建, 分别为这些工具编写脚本是费时费力的工作.</p>
+<p>也有些项目需要对依赖进行管理, 比如依赖的获取, 甚至指定所使用依赖的版本等等.</p>
+<p>相应的, 构建管理工具可以解决这些问题. 通过读取对应的配置文件, 构建管理可以完成依赖的获取安装, 构建脚本的生成, 构建等操作的自动化执行等等.</p>
+<hr />
+<div class="footnote-definition" id="software-build-on-wikipedia"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://en.wikipedia.org/wiki/Software_build">Software build - Wikipedia</a></p>
+</div>
+<div class="footnote-definition" id="static-web-page"><sup class="footnote-definition-label">2</sup>
+<p><a href="https://en.wikipedia.org/wiki/Static_web_page">Static web page - Wikipedia</a></p>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c-多文件编程"><a class="header" href="#c-多文件编程">C++ 多文件编程</a></h1>
 <p>C++ 的初学者通常将所有的代码编写在一个文件内。但随着学识的增长，我们总会接触到许多多文件的项目。那么，多文件能解决什么问题，又有什么好处？</p>
 <h2 id="多文件的好处"><a class="header" href="#多文件的好处">多文件的好处</a></h2>
@@ -378,7 +407,7 @@ $ c++ main.cpp -c -o main.o
 </ul>
 <h2 id="头文件搜索路径"><a class="header" href="#头文件搜索路径">头文件搜索路径</a></h2>
 <p>当使用双引号 <code>&quot;&quot;</code> 包含头文件时，编译器首先查找当前工作目录或源代码目录，然后再在标准位置查找。而使用尖括号 <code>&lt;&gt;</code> 时，编译器将在系统的头文件目录中查找。</p>
-<h2 id="构建工具"><a class="header" href="#构建工具">构建工具</a></h2>
+<h2 id="构建工具-1"><a class="header" href="#构建工具-1">构建工具</a></h2>
 <p>上述生成可执行文件 <code>main</code> 的过程，就叫做<strong>构建</strong> (build)。在这个过程中，我们的 <em>目标</em> 是生成可执行程序 <code>main</code>，而这个目标需要 <code>main.cpp</code>、<code>foo.h</code> 以及 <code>foo.cpp</code> 三个文件；其中，<code>main.cpp</code> 和 <code>foo.cpp</code> 又依赖于 <code>foo.h</code> 文件。</p>
 <p>更具体地来说，生成可执行程序 <code>main</code> <em>依赖</em> <code>main.o</code> 和 <code>foo.o</code> 两个目标文件，而这两个目标文件，又分别由对应的 <code>cpp</code> 文件生成。假如目标文件对应的 <code>cpp</code> 文件发生了更改（又或者其所包含的头文件发生了更改），都需要重新生成相应的目标文件，才能保证最终链接之后生成的可执行程序是最新的。</p>
 <p>不同于曾经的单文件，现在我们要构建一个目标需要多个文件。有两个问题需要解决：</p>

@@ -79,7 +79,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html" class="active">前言</a></li><li class="chapter-item expanded "><a href="basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basics/multi-files-programming.html"><strong aria-hidden="true">1.1.</strong> C++ 多文件编程</a></li></ol></li><li class="chapter-item expanded "><a href="tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="tools/dev-with-vcpkg-cmake-win.html"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li></ol></li><li class="chapter-item expanded "><a href="coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html" class="active">前言</a></li><li class="chapter-item expanded "><a href="basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basics/projects-and-builds.html"><strong aria-hidden="true">1.1.</strong> 项目与构建</a></li><li class="chapter-item expanded "><a href="basics/multi-files-programming.html"><strong aria-hidden="true">1.2.</strong> C++ 多文件编程</a></li></ol></li><li class="chapter-item expanded "><a href="tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="tools/dev-with-vcpkg-cmake-win.html"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li></ol></li><li class="chapter-item expanded "><a href="coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -149,20 +149,11 @@
 <p>该仓库计划存放和 Robomaster 机甲大师对抗赛视觉/算法部分有关的内容。</p>
 <p>该网页使用 <a href="https://github.com/rust-lang/mdBook">mdBook</a> 构建。</p>
 <h2 id="导航"><a class="header" href="#导航">导航</a></h2>
-<!-- 可以使用如下的方式在页面中引用其他的页面 -->
-<!-- 对 *.md 文件的引用链接，会转换为对同名 *.html 的引用 -->
-<!-- 即目录下的 *.md 文件，都会被会转换为 *.html，但是 README.md 会被转换为 index.html -->
-<!-- 因此对某目录下 README 的引用，需要写作 <目录名>/index.html 或者简写作 <目录名>/ -->
-<!-- 注意 “<目录名>/” 最后的 / 不能省却，不然对应页面下相对资源的访问就会出错 -->
-<!-- 可以使用 #TAG 来引用页面下的子标题。具体的转写应参见 mdBook 生成的 HTML 中标题的链接 -->
-<!-- 以上都是针对生成 HTML 而言。但是对于普通文件系统来说，<path>/ 这样的链接是不能访问到对应文件的 -->
-<!-- 可以使用 <path>/README.md，这样转换之后变为 <path>/index.html，不影响两种情况下的访问 -->
-<!-- 但由于目前 mdBook 不会转换 *.md#TAG 这样的链接为 *.html#TAG，所以标题跳转将无法使用（会提示 404，因为输出的 HTML 里没有 md 文件） -->
-<!-- 综上所述，由于 mdBook 最终目的是生成 HTML 以供阅读，因此可以不考虑在普通文件系统上使用的情况？ -->
 <ul>
 <li>
 <p><a href="./basics/">基础知识</a></p>
 <ul>
+<li><a href="./basics/projects-and-builds.html">项目与构建</a></li>
 <li><a href="./basics/multi-files-programming.html">C++ 多文件编程</a></li>
 </ul>
 </li>
