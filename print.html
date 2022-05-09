@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">前言</a></li><li class="chapter-item expanded "><a href="basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basics/projects-and-builds.html"><strong aria-hidden="true">1.1.</strong> 项目与构建</a></li><li class="chapter-item expanded "><a href="basics/multi-files-programming.html"><strong aria-hidden="true">1.2.</strong> C++ 多文件编程</a></li></ol></li><li class="chapter-item expanded "><a href="tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="tools/dev-with-vcpkg-cmake-win.html"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li></ol></li><li class="chapter-item expanded "><a href="coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">前言</a></li><li class="chapter-item expanded "><a href="basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basics/projects-and-builds.html"><strong aria-hidden="true">1.1.</strong> 项目与构建</a></li><li class="chapter-item expanded "><a href="basics/multi-files-programming.html"><strong aria-hidden="true">1.2.</strong> C++ 多文件编程</a></li><li class="chapter-item expanded "><a href="basics/first-cmake.html"><strong aria-hidden="true">1.3.</strong> CMake 基本使用</a></li></ol></li><li class="chapter-item expanded "><a href="tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="tools/dev-with-vcpkg-cmake-win.html"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li></ol></li><li class="chapter-item expanded "><a href="coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -153,6 +153,7 @@
 <ul>
 <li><a href="./basics/projects-and-builds.html">项目与构建</a></li>
 <li><a href="./basics/multi-files-programming.html">C++ 多文件编程</a></li>
+<li><a href="./basics/first-cmake.html">CMake 基本使用</a></li>
 </ul>
 </li>
 <li>
@@ -186,6 +187,7 @@
 <ul>
 <li><a href="basics/./projects-and-builds.html">项目与构建</a></li>
 <li><a href="basics/./multi-files-programming.html">C++ 多文件编程</a></li>
+<li><a href="basics/./first-cmake.html">CMake 基本使用</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="项目与构建"><a class="header" href="#项目与构建">项目与构建</a></h1>
 <p>通常, 在最开始的编程学习中, 或者日常的使用过程中, 编写的程序通常由单文件组成. 这些程序通常不会用于解决复杂的问题, 且多数如流水式描述一个问题的处理过程 (也称 &quot;脚本&quot;).</p>
@@ -225,18 +227,21 @@
 <p><a href="https://en.wikipedia.org/wiki/Static_web_page">Static web page - Wikipedia</a></p>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c-多文件编程"><a class="header" href="#c-多文件编程">C++ 多文件编程</a></h1>
-<p>C++ 的初学者通常将所有的代码编写在一个文件内。但随着学识的增长，我们总会接触到许多多文件的项目。那么，多文件能解决什么问题，又有什么好处？</p>
-<h2 id="多文件的好处"><a class="header" href="#多文件的好处">多文件的好处</a></h2>
-<p>我们先不考虑 C++ 实现多文件的方法。我们只需考虑，如果把代码分区放在不同的文件中，是否会方便我们对于代码的查找、管理和协同工作？</p>
-<p>此外，我们知道，C++ 是一门需要编译的语言。假如代码分别放在不同的区块中，是否可以实现在每次修改时，只更新改动了的部分？</p>
-<p>带着这两个问题，我们便可以继续接下来的内容。</p>
+<p>在上一节 <a href="basics/./projects-and-builds.html">&quot;项目与构建&quot;</a> 中说到, 现实中的项目通常较为复杂, 由若干模块组成. 本篇文章将简单介绍一下 C++ 中的多文件编程.</p>
+<h2 id="多文件编程的好处"><a class="header" href="#多文件编程的好处">多文件编程的好处</a></h2>
+<p>将代码分区放在不同的文件中，可以方便对于代码的查找、管理和协同工作.</p>
+<p>此外，将代码分别放在不同的区块 (也叫做 &quot;翻译单元 (translation unit)&quot;) 中, 可以实现在修改一些文件时, 不至于重新编译整个工程.</p>
 <h2 id="c-编译链接简介"><a class="header" href="#c-编译链接简介">C++ 编译链接简介</a></h2>
-<p>我们先从最熟悉的单文件的情况说起。下面是一个简单的 C++ 源文件，里面有一个 <code>foo</code> 函数和有一个 <code>main</code> 函数。根据经验我们知道，一个 C++ 程序需要有 <code>main</code> 函数才能运行。</p>
+<p>先从最熟悉的单文件的情况说起. 下面是一个简单的 C++ 源文件，里面有一个 <code>foo</code> 函数和有一个 <code>main</code> 函数. </p>
+<blockquote>
+<p>一个 C++ 程序需要有 <code>main</code> 函数才能运行。</p>
+</blockquote>
 <pre><code class="language-cpp">// demo.cpp
 
 int foo(int, int);  // foo 函数的声明
 
 int main() {
+    // main 函数是一个程序的起点
     int result = foo(3, 5);
     return 0;
 }
@@ -245,15 +250,18 @@ int foo(int a, int b) {  // foo 函数的定义
     return 2 * a + b;
 }
 </code></pre>
-<p>我们观察文件发现，<code>main</code> 函数调用了 <code>foo</code> 函数。这不是件理所当然的事。事实上，在 <strong>编译</strong> (compile) 过程中，当编译器遇到 <code>foo(3, 5)</code> 这样的表达式时，会去查看是否存在这样的函数可供使用，也就是查找在之前是否已经出现了函数的声明。</p>
-<p>对于这里的 <code>foo(3, 5)</code> 语句来说，编译器就要去查找，是否有一个名为 <code>foo</code> 的函数声明，满足参数为两个 <code>int</code> 型整数的情况；如果没有，就要去查找之前的函数声明中，是否有参数列表中参数类型支持从 <code>int</code> 类型转换而得的 <code>foo</code> 函数。</p>
-<p>幸运的是，在这条语句之前，我们有一个这样的函数声明，因此编译器能够通过编译；否则，就会报出 <strong>未定义/未声明标识符</strong> (undefined/undeclared identifier) 的错误。</p>
-<p>但是，现在还不能生成最终的可执行程序，因为我们还不清楚 <code>foo</code> 函数的具体定义。编译器会将这个符号加入到 <em>未解决符号表</em> 中。</p>
-<p>不过，在这个情况里，编译器接着往下走，就会发现 <code>foo</code> 函数的定义，并将其出现的位置记下来。</p>
-<p>如此，编译器就从源代码文件生成了目标文件，之后，将进入<strong>链接</strong> (Linking) 阶段。在这个阶段中，编译器根据未解决符号表，去查找是否具有对应的符号，查找到之后，就将为未解决符号记下符号所在的位置。</p>
-<p>在上面的例子中，<code>foo(3, 5)</code> 这个语句将会找到在 <code>main</code> 函数之后定义的 <code>foo</code> 函数，因此被解决。如果没有查找到，将会出现 <strong>未解决的外部符号</strong> (unresolved external symbol) 或者 <strong>未定义引用</strong> (undefined reference) 的错误。</p>
+<p>可以看到, 上述的代码中，<code>main</code> 函数调用了 <code>foo</code> 函数. 但这不是件理所当然的事.</p>
+<p>事实上, 在 <strong>编译</strong> (compile) 过程中, 当编译器遇到 <code>foo(3, 5)</code> 这样的语句时, 会去查看是否存在这样的函数可供使用.</p>
+<p>这个例子中, <code>foo</code> 函数的原型已在调用处之前声明, 因此编译器能够理解 <code>foo(3, 5)</code> 这样的语句.</p>
+<pre><code class="language-cpp">int foo(int, int);  // foo 函数的声明
+</code></pre>
+<p>具体来说, 对于该语句, 编译器会去查找，是否有一个名为 <code>foo</code> 的函数 <strong>声明</strong> (declaration). 满足参数为两个 <code>int</code> 型整数的情况 (或者参数列表中参数类型支持从 <code>int</code> 类型转换而得); 如果没有, 编译器就会报错, 提示这个符号 &quot;还没有在作用中被声明 (was not declared in scope)&quot;, 或者说这是一个 &quot;未声明标识符 (undeclared identifier)&quot;.</p>
+<p>但是现在还不能生成最终的可执行程序, 因为我们还不清楚 <code>foo</code> 函数的具体定义. 为此, 编译器会将这个符号加入到 <em>未解决符号表</em> 中。</p>
+<p>在这个例子中, 编译器接着往下分析文件中的内容, 就会发现 <code>foo</code> 函数的定义, 并将其出现的位置记录下来, 供之后 <strong>链接</strong> (Linking) 阶段的使用.</p>
+<p>如此, 编译器就从源代码文件生成了目标文件. 在链接过程中, 编译器根据未解决符号表, 在每个编译得到的目标文件中查找对应的符号, 查找到之后, 就记录下相应的位置, 也就是将不同位置的代码 &quot;链接&quot; 起来.</p>
+<p>在上面的例子中, <code>foo(3, 5)</code> 这个语句将会找到在 <code>main</code> 函数之后定义的 <code>foo</code> 函数, 因此被解决. 否则, 将会出现 &quot;未解决的外部符号 (unresolved external symbol)&quot; 或者 &quot;未定义引用 (undefined reference)&quot; 的错误.</p>
 <blockquote>
-<p>事实上，我们也可以将函数和声明和函数定义写在一起，比如下面这样。</p>
+<p>也可以将函数和声明和函数定义写在一起, 比如下面这样:</p>
 <pre><code class="language-cpp">// demo.cpp
 
 int foo(int, int) { return 2 * a + b; }
@@ -266,22 +274,24 @@ int main() {
 </blockquote>
 <p>我们将每一个 C/C++ 源文件称作一个翻译单元 (translation unit)。那么在上述的例子中，我们的翻译单元会提供一个 <code>int foo(int, int)</code> 和一个 <code>int main()</code> 的符号，并且有一个 <code>int foo(int, int)</code> 的符号待解决。经过了链接过程，未解决符号得到了解决，于是就可以生成可执行程序了。</p>
 <h2 id="将文件拆开"><a class="header" href="#将文件拆开">将文件拆开</a></h2>
-<p>假如 <code>foo</code> 函数是一个经常会被用到的函数。在单文件的情况时，我们每写一个新的程序，都需要将其复制到新的源代码文件中。但有了之前的基础，我们发现，可以将 <code>foo</code> 函数拿出来放进单独的文件中。</p>
+<p>假如 <code>foo</code> 函数是一个经常会被用到的函数, 那么在单文件的情况时, 往往每编写一个新的程序, 都需要将其复制到新的源代码文件中.</p>
+<p>这样做会产生很多重复的内容, 不利于对代码的维护, 并且有可能增加额外的编译时间.</p>
+<p>通过之前的内容, 不难想到, 可以将 <code>foo</code> 函数单独存放在一个文件中. 如此, 只要提供声明, 其他的代码可以成功调用该函数, 只要确保 <code>foo</code> 函数编译后所在的目标文件也参与链接过程即可.</p>
 <blockquote>
 <p>接下来的例子中涉及到通过命令行操作编译器。读者只需要明白操作的目的即可，实际使用中不必要手动输入这些命令。</p>
 </blockquote>
-<p>下面的 <code>foo.cpp</code> 是一个包含 <code>foo</code> 函数的源代码文件。</p>
+<p>下面的 <code>foo.cpp</code> 是一个包含 <code>foo</code> 函数的源代码文件:</p>
 <pre><code class="language-cpp">// foo.cpp
 
 int foo(int a, int b) {
     return 2 * a + b;
 }
 </code></pre>
-<p>我们让编译器编译 <code>foo.cpp</code> 生成目标文件 <code>foo.o</code>。</p>
+<p>让编译器编译 <code>foo.cpp</code> 生成目标文件 <code>foo.o</code>:</p>
 <pre><code class="language-console">$ c++ foo.cpp -c -o foo.o
 </code></pre>
-<p>不出意外的话，当前目录下会多出一个名为 <code>foo.o</code> 的目标文件。目标文件的内容一般不易为人类所阅读，我们只需要知道，这个目标文件提供了 <code>int foo(int, int)</code> 这样一个符号。</p>
-<p>接着，我们的 <code>main.cpp</code> 将会写作下面的样子。</p>
+<p>不出意外的话, 当前目录下会多出一个名为 <code>foo.o</code> 的目标文件. 目标文件的内容一般不易为人类所阅读, 不过只要明白这个目标文件提供了 <code>int foo(int, int)</code> 这样一个符号即可.</p>
+<p>而 <code>main.cpp</code> 将会写作下面的样子, 其中需要包含对 <code>foo</code> 函数的声明, 即可使用对应的函数, 并通过编译.</p>
 <pre><code class="language-cpp">// main.cpp
 
 int foo(int, int);  // 只需要 foo 函数的声明
@@ -291,14 +301,20 @@ int main() {
     return 0;
 }
 </code></pre>
-<p>同样，我们将 <code>main.cpp</code> 编译为目标文件。这个目标文件提供了 <code>int main()</code> 这样一个符号，但有一个 <code>int foo(int, int)</code> 的符号待解决。</p>
-<p>之后，我们将两个目标文件链接起来，期望生成最后的可执行程序 <code>main</code>。很顺利，没有出现未解决符号，可执行文件生成成功。</p>
+<p>同样, 将 <code>main.cpp</code> 编译为目标文件:</p>
+<pre><code class="language-console">$ c++ main.cpp -c -o main.o
+</code></pre>
+<p>类似的, 这个目标文件提供了 <code>int main()</code> 这样一个符号，但有一个 <code>int foo(int, int)</code> 的符号待解决.</p>
+<p>最后, 为了生成最后的可执行程序 <code>main</code>, 我们需要将这些目标文件链接起来:</p>
 <pre><code class="language-console">$ c++ main.o foo.o -o main
 </code></pre>
+<p>如果一切顺利, 将不会出现未解决符号, 可执行文件生成成功.</p>
 <h2 id="预处理指令"><a class="header" href="#预处理指令">预处理指令</a></h2>
-<p>在编译之前，编译器会先对代码文件进行预处理。有很多预处理指令，比如 <code>define</code>、<code>include</code>。这些命令通常以 <code>#</code> 开始。</p>
-<p>一般来说，<code>define</code> 命令可以用来将代码中的宏名替换为对应的内容。除此之外，<code>define</code> 也可以和 <code>ifndef</code>、<code>ifndef</code> 命令配合起来实现“条件编译”。</p>
-<p>比如，下面的代码中，因为 <code>define</code> 过名为 <code>FLAG</code> 的宏 (macro)，因此，<code>ifdef</code> 命令条件为真，<code>#ifdef FLAG</code> 和 <code>#endif</code> 之间的代码将会出现在预处理过的代码中；反之，如果没有定义过 <code>FLAG</code>，则其中的代码将不会出现在预处理的结果中。</p>
+<p>在编译之前, 编译器会先对代码文件进行预处理.</p>
+<p>有很多预处理指令, 这些命令通常以 <code>#</code> 开始, 常见的有 <code>#define</code>、<code>#include</code> 等.</p>
+<h3 id="条件编译"><a class="header" href="#条件编译">条件编译</a></h3>
+<p>一般来说, <code>define</code> 可以声明一个宏, 或者可以将代码中的宏名替换为相应的内容. 除此之外, <code>define</code> 也可以和 <code>ifndef</code>, <code>ifndef</code> 命令配合起来实现 &quot;条件编译&quot;.</p>
+<p>下面的代码中, 因为 <code>define</code> 过名为 <code>FLAG</code> 的宏 (macro), 因此 <code>ifdef</code> 命令条件为真, 故 <code>#ifdef FLAG</code> 和 <code>#endif</code> 之间的代码将会出现在预处理过的代码中; 反之, 如果没有定义过 <code>FLAG</code>, 其间的代码将不会出现在预处理之后的结果中.</p>
 <pre><code class="language-cpp">#define FLAG
 
 int foo(int, int);
@@ -310,7 +326,7 @@ int main() {
     return 0;
 }
 </code></pre>
-<p><code>ifndef</code> 的作用和 <code>ifdef</code> 相反，即，如果没有定义过相应的宏名，才会满足条件。下面的代码中，<code>#ifndef FLAG</code> 和 <code>#endif</code> 之间的代码不会出现在预处理的结果中。</p>
+<p><code>ifndef</code> 的作用和 <code>ifdef</code> 相反. 即, 没有定义过相应的宏名, 才会满足条件. 下面的代码中, <code>#ifndef FLAG</code> 和 <code>#endif</code> 之间的代码不会出现在预处理的结果中.</p>
 <pre><code class="language-cpp">#define FLAG
 
 int foo(int, int);
@@ -322,10 +338,13 @@ int main() {
     return 0;
 }
 </code></pre>
-<p>而<code>include</code> 命令即为将相应的文件内容复制到当前文件里。没错，就是按照原样复制进来。</p>
-<h2 id="头文件"><a class="header" href="#头文件">头文件</a></h2>
-<p>在上一节的例子中，我们在 <code>main.cpp</code> 中手动写入了 <code>int foo(int, int);</code> 的声明。但当声明较多时，手动编写或复制仍是比较麻烦的。因此，我们一般要为自己的 <code>foo.cpp</code> 编写相应的头文件 (headers) <code>foo.h</code>。这样，我们只需在 <code>main.cpp</code> 中 <code>include</code> 头文件 <code>foo.h</code> 即可。</p>
-<p>现在，目录下有这样三个文件：</p>
+<h3 id="include-包含命令"><a class="header" href="#include-包含命令"><code>include</code> 包含命令</a></h3>
+<p><code>include</code> 命令则会将被包含文件的内容原样复制到文件的对应位置里. 这里不再举例.</p>
+<h2 id="使用头文件"><a class="header" href="#使用头文件">使用头文件</a></h2>
+<p>在前面的例子中, 我们在 <code>main.cpp</code> 中手动写入了 <code>int foo(int, int);</code> 的声明. 但当声明较多时，手动编写或复制仍是比较麻烦的.</p>
+<p><code>include</code> 命令可以轻松实现代码的包含引入.</p>
+<p>为 <code>foo.cpp</code> 编写相应的头文件 (header) <code>foo.h</code> 之后, 便只需在调用处 --- 比如 <code>main.cpp</code> 中 --- 包含 (include) 对应的头文件即可。</p>
+<p>还是使用前文用到的例子, 接下来将其拆分成以下三个文件, 并添加一些其他的内容:</p>
 <ul>
 <li><a href="basics/./assets/1/foo.h">foo.h</a></li>
 <li><a href="basics/./assets/1/foo.cpp">foo.cpp</a></li>
@@ -357,8 +376,11 @@ public:
 </code></pre>
 <p>注意，<a href="basics/./assets/1/foo.h">foo.h</a> 中使用 <code>ifndef</code> 等命令实现了该文件在每个翻译单元中仅会被包含一次。这叫做头文件保护 (header guards)。如果用户在一个源文件中不小心引用了两次头文件，或是包含的若干个头文件中都包含了某个头文件，那么将会出现同一个头文件在一个源文件中被引用多次的情况，即造成了重复声明。</p>
 <p>此外，头文件中一般不能包含函数定义。试想，如果包含了函数定义的头文件被多个源代码文件包含，则这些源代码文件编译生成的目标文件中都会出现相同的符号。这会导致链接过程中链接器无法决定该使用哪一个符号。同理，也不应该使用 <code>include</code> 将函数定义的代码直接包含进源代码文件。</p>
-<p>不过，实际使用中也会出现需要将一些常用的函数放在头文件中的情况，亦即我们在会在很多源文件中用到这一函数。我们希望这些相同的函数在链接时不会相互冲突，因此，我们需要使用 <code>inline</code> 关键字修饰它。</p>
-<p>另一种情况是，我们希望一个函数仅在当前翻译单元可用，而在不同的翻译单元中可能同名但定义不同的函数。这时我们应用 <code>static</code> 关键字修饰它们。</p>
+<blockquote>
+<p>不过, 实际使用中也会出现需要将一些常用的函数放在头文件中的情况, 也就是说, 这一函数会在很多源文件中用到. 在经过编译后, 各个目标文件中均会出现这些相同的符号, 而我们不希望它们链接时发生冲突, 因此需要使用 <code>inline</code> 关键字修饰它们.</p>
+<p>另一种情况是, 我们希望一个函数仅在当前翻译单元可用, 而在不同的翻译单元中可能存在同名但定义不同的函数. 这时应用 <code>static</code> 关键字修饰它们. </p>
+<p>需要注意, 类的声明中直接写出的函数都会被视作 <code>inline</code> 的来处理.</p>
+</blockquote>
 <pre><code class="language-cpp">// foo.cpp
 
 #include &quot;foo.h&quot;
@@ -402,29 +424,69 @@ $ c++ main.cpp -c -o main.o
 </code></pre>
 <p>参考资料：</p>
 <ul>
-<li>https://en.cppreference.com/w/c/language/storage_duration</li>
-<li>https://en.cppreference.com/w/cpp/language/storage_duration</li>
+<li><a href="https://en.cppreference.com/w/c/language/storage_duration">https://en.cppreference.com/w/c/language/storage_duration</a></li>
+<li><a href="https://en.cppreference.com/w/cpp/language/storage_duration">https://en.cppreference.com/w/cpp/language/storage_duration</a></li>
 </ul>
-<h2 id="头文件搜索路径"><a class="header" href="#头文件搜索路径">头文件搜索路径</a></h2>
-<p>当使用双引号 <code>&quot;&quot;</code> 包含头文件时，编译器首先查找当前工作目录或源代码目录，然后再在标准位置查找。而使用尖括号 <code>&lt;&gt;</code> 时，编译器将在系统的头文件目录中查找。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cmake-基本使用"><a class="header" href="#cmake-基本使用">CMake 基本使用</a></h1>
 <h2 id="构建工具-1"><a class="header" href="#构建工具-1">构建工具</a></h2>
-<p>上述生成可执行文件 <code>main</code> 的过程，就叫做<strong>构建</strong> (build)。在这个过程中，我们的 <em>目标</em> 是生成可执行程序 <code>main</code>，而这个目标需要 <code>main.cpp</code>、<code>foo.h</code> 以及 <code>foo.cpp</code> 三个文件；其中，<code>main.cpp</code> 和 <code>foo.cpp</code> 又依赖于 <code>foo.h</code> 文件。</p>
-<p>更具体地来说，生成可执行程序 <code>main</code> <em>依赖</em> <code>main.o</code> 和 <code>foo.o</code> 两个目标文件，而这两个目标文件，又分别由对应的 <code>cpp</code> 文件生成。假如目标文件对应的 <code>cpp</code> 文件发生了更改（又或者其所包含的头文件发生了更改），都需要重新生成相应的目标文件，才能保证最终链接之后生成的可执行程序是最新的。</p>
-<p>不同于曾经的单文件，现在我们要构建一个目标需要多个文件。有两个问题需要解决：</p>
+<p>在 <a href="basics/./multi-files-programming.html#%E4%BD%BF%E7%94%A8%E5%A4%B4%E6%96%87%E4%BB%B6">上一节的例子</a> 中, 生成可执行文件 <code>main</code> 的过程, 就叫做<strong>构建</strong> (build).</p>
+<p>在这个过程中, 我们的 <em>目标</em> 是生成可执行程序 <code>main</code>.</p>
+<p>简单来说, 生成这个目标需要 <code>main.cpp</code>, <code>foo.h</code> 以及 <code>foo.cpp</code> 三个文件.</p>
+<blockquote>
+<p>更具体地说, 生成可执行程序 <code>main</code> <em>依赖</em> <code>main.o</code> 和 <code>foo.o</code> 两个目标文件, 而这两个目标文件, 又分别由对应的 <code>cpp</code> 文件生成.</p>
+</blockquote>
+<p>其中, <code>main.cpp</code> 和 <code>foo.cpp</code> 又依赖于 <code>foo.h</code> 文件 (因为包含了前二者包含了后者 <code>foo.h</code>).</p>
+<p>假如目标文件对应的 <code>cpp</code> 文件发生了更改 (或者其所包含的头文件发生了更改), 都需要重新生成相应的目标文件, 才能保证最终链接之后生成的可执行程序是最新的.</p>
+<p>不同于曾经的单文件, 现在要构建一个目标涉及到了多个文件. 有些问题需要解决:</p>
 <ul>
-<li>每次都需要输入多条命令才能完成编译、链接，而不是一条；</li>
-<li>我们希望减少编译的次数，因此需要记录哪些文件发生了更改，只对有必要重新编译的文件编译。</li>
+<li>每次都需要输入多条命令才能完成编译链接;</li>
+<li>希望减少编译的时间, 只希望编译发生了更改的部分, 因此需要判断哪些文件发生了更改, 从而只对有必要重新编译的文件进行编译;</li>
+<li>...</li>
 </ul>
-<p>如果项目更多、项目之间有依赖关系，则需要输入更多、更复杂的命令，也需要留意更多的文件。如果全由用户来做，很容易出现差错。</p>
-<p>构建工具可以帮助我们自动化上述的流程。我们告诉构建工具生成目标需要哪些依赖，构建工具就可以在每次我们需要重新构建目标时，检测需要重新生成的文件，并完成构建流程。</p>
-<p>一些 IDE 会有自己的构建工具，但通常把这个过程对用户隐去了。用户将源代码添加进一个“项目”中，IDE 便将其视作生成该项目的依赖。</p>
-<h2 id="cmake"><a class="header" href="#cmake">CMake</a></h2>
-<p>使用 CMake 这样一个构建管理工具，只需编写一个 <code>CMakeLists.txt</code> 文件，便可以生成用于不同构建工具的脚本。</p>
-<h2 id="具体演示"><a class="header" href="#具体演示">具体演示</a></h2>
-<p>可以在 <a href="https://gitlab.com/klixr/cpp-multi-file-demo/">gitlab.com/klixr/cpp-multi-file-demo</a> 查看一个具体的示例。</p>
-<p>也可通过下边的链接访问上述示例的副本。</p>
-<p>假设我们现在有这样一个 C++ 文件 <a href="basics/assets/2/single_file_demo.cpp">single_file_demo.cpp</a>，示例将其拆分成了多文件的形式。</p>
-<p><code>Date</code> 库：</p>
+<p>如果项目更多, 项目之间有依赖关系等等, 则可能需要输入更多更复杂的命令, 也需要留意更多的文件. 如果全由用户来做, 很容易出现差错.</p>
+<p>构建工具可以帮助我们自动化上述的流程. 我们告诉构建工具生成目标需要哪些依赖, 构建工具就可以在每次我们需要重新构建目标时, 检测需要重新生成的文件, 并完成构建流程. </p>
+<blockquote>
+<p>一些 IDE 会有自己的构建工具, 但对于初学者, 这个过程并不是那么明显. 往往, 用户将源代码添加进一个 &quot;项目&quot; 中, IDE 便将其视作生成该项目的依赖, 而不需用户显式指定. </p>
+</blockquote>
+<h2 id="使用外部库"><a class="header" href="#使用外部库">使用外部库</a></h2>
+<p>接下来将通过一个使用外部库的例子, 来介绍之后的内容. 该示例所使用的代码也可以在 <a href="https://gitlab.com/tsagaanbar/cpp-multi-file-demo/">gitlab.com/tsagaanbar/cpp-multi-file-demo</a> 查看.</p>
+<h3 id="提取代码成库"><a class="header" href="#提取代码成库">提取代码成库</a></h3>
+<p>假设我们现在有这样一个 C++ 文件 <a href="basics/assets/2/single_file_demo.cpp">single_file_demo.cpp</a>, 发现其中的 <code>Date</code> 相关代码有复用的价值, 因此计划将其拆分出来, 单独成库.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+auto is_leap(int y) {
+    return (y % 4 ==0 &amp;&amp; y % 100 != 0) || y % 400 == 0;
+}
+
+struct Date
+{
+    int y;
+    int m;
+    int d;
+    Date(int y_, int m_, int d_) : y(y_), m(m_), d(d_) {}
+};
+
+auto calc_days(Date const &amp; date) {
+    int days[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (is_leap(date.y)) {
+        days[2] = 29;
+    }
+    auto cnt = 0;
+    for (int i = 1; i &lt; date.m; ++i) {
+        cnt += days[i];
+    }
+    cnt += date.d;
+    return cnt;
+}
+
+int main() {
+    int y, m, d;
+    std::cin &gt;&gt; y &gt;&gt; m &gt;&gt; d;
+    Date d1(y, m, d);
+    std::cout &lt;&lt; calc_days(d1);
+}
+</code></pre>
+<p>具体来说, 可以将代码中相关的 <code>is_leap</code> 和 <code>calc_days</code> 等函数, 变成 <code>Date</code> 类的成员方法. 结果如下:</p>
 <p><a href="basics/assets/2/Date/Date.hpp">Date/Date.hpp</a></p>
 <pre><code class="language-cpp">// Date.hpp
 
@@ -442,11 +504,12 @@ class Date {
     int y;
     int m;
     int d;
-    auto is_leap(int year) {
+    bool is_leap(int year) {
         return (year % 4 ==0 &amp;&amp; year % 100 != 0) || year % 400 == 0;
     }
+
 public:
-    // 类的声明中直接书写的函数也属于 inline 函数
+    // 类的声明中直接书写的函数是 inline 的
     Date(int y_, int m_, int d_) : y(y_), m(m_), d(d_) {}
 
     // 也可以只写声明，再在 cpp 文件中实现这个函数
@@ -478,14 +541,14 @@ int Date::get_days()
 }
 
 </code></pre>
-<p><a href="basics/assets/2/Date/CMakeLists.txt">Date/CMakeLists.txt</a></p>
-<pre><code class="language-cmake">project(My-Date)
-
-add_library(Date &quot;Date.hpp&quot; &quot;Date.cpp&quot;)
-target_include_directories(Date INTERFACE .)
-</code></pre>
-<p>使用 <code>Date</code> 库：</p>
-<p><a href="basics/assets/2/demo.cpp">demo.cpp</a></p>
+<h3 id="调用外部库"><a class="header" href="#调用外部库">调用外部库</a></h3>
+<p>那么该怎么调用这个外部库呢? 有多种情况, 一般来讲, 应当将该库的源代码与项目一同进行编译; 也有的时候, 库的开发者不提供源代码, 只有编译好的二进制文件和对应的头文件.</p>
+<p>不管属于哪种情况, 都需要包含对应的头文件. 前者需要在链接时提供需要的目标文件, 后者则需要指定需要链接的库文件.</p>
+<p>在编译这些使用了外部库的项目时, 由于需要包含外部的头文件, 而外部头文件的位置则是千差万别, 因此一般需要给编译器指定头文件搜索的路径. </p>
+<blockquote>
+<p>关于 <code>#include</code> 命令的搜索范围: 当使用双引号 <code>&quot;&quot;</code> 包含头文件时, 编译器首先查找当前工作目录或源代码目录, 然后再在标准位置查找. 而使用尖括号 <code>&lt;&gt;</code> 时, 编译器将在系统的头文件目录中查找. </p>
+</blockquote>
+<p>比如, 下面的 <a href="basics/assets/2/demo.cpp">demo.cpp</a> 使用了 <code>Date</code> 库, 但是 <code>#include</code> 命令只是写出了 <code>Date.hpp</code> 的相对路径 (一般也建议这样做), 因此编译时需要指定头文件的搜索路径: </p>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
 #include &quot;Date.hpp&quot;
 
@@ -496,25 +559,49 @@ int main() {
     std::cout &lt;&lt; d1.get_days();
 }
 </code></pre>
+<p>假设 <code>Date.hpp</code> 和 <code>Date.cpp</code> 都位于和 <code>demo.cpp</code> 同目录下的 <code>Date</code> 目录中:</p>
+<pre><code class="language-console">$ c++ demo.cpp -c -o demo.o -I ./Date   # 编译 demo.cpp
+$ c++ Date/Date.cpp -c -o ./Date.o      # 编译 Date.cpp
+$ c++ demo.o Date.o -o demo             # 链接生成可执行程序 demo
+</code></pre>
+<h2 id="cmake"><a class="header" href="#cmake">CMake</a></h2>
+<p>经过上述的例子, 可见手动完成构建是很复杂的. 当然, 可以使用构建工具, 并编写 Make 等构建工具的脚本, 但是由于其适用性不广, 以下只介绍使用 CMake 的方法.</p>
+<p>使用 CMake 这样一个构建管理工具, 只需编写一个 <code>CMakeLists.txt</code> 文件, 便可以生成用于不同构建工具的脚本. </p>
+<p>首先, 为 <code>Date</code> 库编写一个 CMake 脚本. 下面的例子定义了一个名为 <code>Date</code> 的生成 &quot;库 (library)&quot; 的目标.</p>
+<p><a href="basics/assets/2/Date/CMakeLists.txt">Date/CMakeLists.txt</a></p>
+<pre><code class="language-cmake">project(My-Date)
+
+cmake_minimum_required(VERSION 3.13)
+
+# 指定 C++ 版本
+set(CMAKE_CXX_STANDARD 14)
+
+# 创建一个库目标, 使用 Date.hpp, Date.cpp 两个源文件; 默认生成的是静态链接库
+add_library(Date &quot;Date.hpp&quot; &quot;Date.cpp&quot;)
+
+# 设定库目标的包含路径
+target_include_directories(Date PUBLIC .)
+</code></pre>
+<p>之后, 如果要使用这个库, 便不再需要逐一指明目标 demo 需要的源文件: 因为之前已经定义了生成库目标的规则, 之后只需要包含对应的目录 (作为子项目引入), 即可直接使用这个目标:</p>
 <p><a href="basics/assets/2/CMakeLists.txt">CMakeLists.txt</a></p>
 <pre><code class="language-cmake">project(CPP-Multi-File-Demo)
 
 add_executable(single_file_demo &quot;single_file_demo.cpp&quot;)
 
-# 逐一指明目标 demo 需要的源文件
-# add_executable(demo &quot;demo.cpp&quot; &quot;Date/Date.hpp&quot; &quot;Date/Date.cpp&quot;)
-
-# 或者：
-
-# 将 Date 生成为一个 Library
-# 并作为子项目引入
-# 子目录 Date 中的 CMakeLists.txt 包含生成 Date 这个 library 的目标
-
+# 子目录 Date 中的 CMakeLists.txt 中包含生成 Date 这个目标, 引入后便可以使用
 add_subdirectory(Date)
 
+# 创建一个名为 demo 的生成可执行文件的目标, 使用 demo.cpp 源文件
 add_executable(demo &quot;demo.cpp&quot;)
+
+# 将 demo 和 &quot;Date&quot; 库进行链接
 target_link_libraries(demo Date)
 </code></pre>
+<blockquote>
+<p>如果 <code>add_library</code> 时给出 <code>OBJECT</code> 参数, CMake 将不会生成库文件, 效果等同于逐一指明目标 <code>demo</code> 需要的源文件.</p>
+<pre><code class="language-cmake">add_library(Date OBJECT &quot;Date.hpp&quot; &quot;Date.cpp&quot;)
+</code></pre>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="开发环境配置和使用"><a class="header" href="#开发环境配置和使用">开发环境配置和使用</a></h1>
 <ul>
 <li><a href="tools/./vscode-cmake-extension.html">Visual Studio Code 中 CMake 插件的基本使用</a></li>
