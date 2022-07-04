@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html lang="zh-Hans" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>代码库的概念 - RM-CV Wiki</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/css/custom-style.css">
+        <link rel="stylesheet" href="../theme/css/custom-font.css">
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">前言</a></li><li class="chapter-item expanded "><a href="../basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/projects-and-builds.html"><strong aria-hidden="true">1.1.</strong> 项目与构建</a></li><li class="chapter-item expanded "><a href="../basics/multi-files-programming.html"><strong aria-hidden="true">1.2.</strong> C++ 多文件编程</a></li><li class="chapter-item expanded "><a href="../basics/about-libraries.html" class="active"><strong aria-hidden="true">1.3.</strong> 代码库的概念</a></li><li class="chapter-item expanded "><a href="../basics/first-cmake.html"><strong aria-hidden="true">1.4.</strong> 初识 CMake</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="../tools/dev-with-vcpkg-cmake-win.html"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li></ol></li><li class="chapter-item expanded "><a href="../coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="../TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="../TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">RM-CV Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/MUC-RM-CV/wiki" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/MUC-RM-CV/wiki/edit/main/src/basics/about-libraries.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="代码库的概念"><a class="header" href="#代码库的概念">代码库的概念</a></h1>
+<h2 id="为什么要使用-库"><a class="header" href="#为什么要使用-库">为什么要使用 &quot;库&quot;</a></h2>
+<p>在上一节中, 我们引入了 &quot;多文件&quot; 这样的方法, 来减少代码的重复, 提高代码的复用性.</p>
+<p>而当我们把一类经常会被使用到的代码整理在一起, 就成了一个代码库.</p>
+<p>而要理解库的概念, 建议从 &quot;源代码&quot; 和 &quot;编译后&quot; 两个层面进行.</p>
+<h2 id="提取代码成库"><a class="header" href="#提取代码成库">提取代码成库</a></h2>
+<p>从源代码的层面来理解很直观, 就是把代码有条理的整理在一起.</p>
+<p>接下来将通过一个例子, 来介绍之后的内容, 包括代码的提取整理成库, 以及之后的使用. 该示例所使用的代码也可以在 <a href="https://gitlab.com/kLiHz/cpp-multi-file-demo/">gitlab.com/kLiHz/cpp-multi-file-demo</a> 查看.</p>
+<p>假设我们现在有这样一个 C++ 文件 <a href="assets/2/single_file_demo.cpp">single_file_demo.cpp</a>, 发现其中的 <code>Date</code> 相关代码有复用的价值, 因此计划将其拆分出来, 单独成库.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+auto is_leap(int y) {
+    return (y % 4 ==0 &amp;&amp; y % 100 != 0) || y % 400 == 0;
+}
+
+struct Date
+{
+    int y;
+    int m;
+    int d;
+    Date(int y_, int m_, int d_) : y(y_), m(m_), d(d_) {}
+};
+
+auto calc_days(Date const &amp; date) {
+    int days[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (is_leap(date.y)) {
+        days[2] = 29;
+    }
+    auto cnt = 0;
+    for (int i = 1; i &lt; date.m; ++i) {
+        cnt += days[i];
+    }
+    cnt += date.d;
+    return cnt;
+}
+
+int main() {
+    int y, m, d;
+    std::cin &gt;&gt; y &gt;&gt; m &gt;&gt; d;
+    Date d1(y, m, d);
+    std::cout &lt;&lt; calc_days(d1);
+}
+</code></pre>
+<p>具体来说, 可以将代码中相关的 <code>is_leap</code> 和 <code>calc_days</code> 等函数, 变成 <code>Date</code> 类的成员方法. 结果如下:</p>
+<p><a href="assets/2/Date/Date.hpp">Date/Date.hpp</a></p>
+<pre><code class="language-cpp">// Date.hpp
+
+// 头文件需要进行保护，目的是避免重复包含
+
+#ifndef DATE_HPP
+#define DATE_HPP
+
+// 头文件中不能包含具体的定义
+// 由于头文件可能会被多个 cpp （编译单元）包含
+// 如果头文件中包含具体的定义，这些编译单元在最后链接过程中，会出现多个重复的符号
+// 如果确需在头文件中包含具体函数的定义，需要声明为 inline（内联）
+
+class Date {
+    int y;
+    int m;
+    int d;
+    bool is_leap(int year) {
+        return (year % 4 ==0 &amp;&amp; year % 100 != 0) || year % 400 == 0;
+    }
+
+public:
+    // 类的声明中直接书写的函数是 inline 的
+    Date(int y_, int m_, int d_) : y(y_), m(m_), d(d_) {}
+
+    // 也可以只写声明，再在 cpp 文件中实现这个函数
+    int get_days();
+};
+
+
+#endif // DATE_HPP
+</code></pre>
+<p><a href="assets/2/Date/Date.cpp">Date/Date.cpp</a></p>
+<pre><code class="language-cpp">// Date.cpp
+
+// 由于需要实现 Date.hpp 中声明的函数，需要包含 Date.hpp
+
+#include &quot;Date.hpp&quot;
+
+int Date::get_days()
+{
+    int days[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (is_leap(this-&gt;y)) {
+        days[2] = 29;
+    }
+    auto cnt = 0;
+    for (int i = 1; i &lt; this-&gt;m; ++i) {
+        cnt += days[i];
+    }
+    cnt += this-&gt;d;
+    return cnt;
+}
+
+</code></pre>
+<p>如此, 我们便得到了一个库 (或者说是库的源代码/源代码形式的库), 该库由 <code>Date.cpp</code> 和 <code>Date.hpp</code> 组成. 使用该库的用户, 可以调用该库中的功能, 而不必重新编写代码.</p>
+<h2 id="库的分发形式"><a class="header" href="#库的分发形式">库的分发形式</a></h2>
+<p>我们可以将这个库分享给其他用户使用, 一种方式便是以源代码的形式.</p>
+<p>对于<strong>使用以源代码形式分发的库</strong>的用户来说, 一般会是像上一节中介绍的方式那样, 在需要使用库的地方, 引入头文件中的声明, 之后将自己的源文件和库的源文件均编译得到目标文件, 最后链接得到完整的可执行程序.</p>
+<p>除此之外, 假如我们不希望公开库的源代码, 或者希望该库可以更方便地进行分发, 我们还可以将这个库构建为 (某个操作系统平台上的) <strong>库文件</strong>. 构建成库文件的过程像是把多个目标文件 (假如库中包含多个源文件) 打包在一起, 但是不完全如此; 虽然目标文件中也是编译后的二进制代码, 但是它们更像是构建的中间产物, 而库文件可能会经过一些专门的优化, 更像是完善的商品.</p>
+<p>相较于以源文件形式分发的库, 使用 (编译后的) 库文件不必花时间重新编译, 并且可以享受来自发布者的优化; 缺点则是, 使用过程中很可能遇到平台兼容性的问题.</p>
+<blockquote>
+<p>详情可以参考 &quot;ABI (应用程序二进制接口) 兼容性&quot;.</p>
+</blockquote>
+<p>对于 C++ 来说, 有一种特殊的 &quot;头文件库 (<strong>header-only</strong> libraries)&quot;. 顾名思义, 这种库只有头文件组成, 库中包含的代码都 (以源代码形式) 存储在头文件里, 因此用户只需在自己的程序中引用头文件即可使用库中的功能. 这种库的好处是携带使用起来都很方便, 缺点是会增加编译的时间.</p>
+<p>此外, 对于以解释型语言 (比如 Python, JavaScript 等) 写成的库, 通常不存在编译这样的说法, 因为代码均需要解释器来执行, 所以分发时一般都是人类可以阅读 (但是不一定方便阅读) 的文本形式.</p>
+<p>但是有几种情况涉及到 &quot;编译&quot; 或者类似的概念. </p>
+<p>一是该库由一种更 &quot;高级&quot; 的语言写成, 需要编译器处理, 才能得到能够直接被解释器解释的代码; </p>
+<p>二是为了便于传输, 代码会经过一种叫做 <a href="https://en.wikipedia.org/wiki/Minification_(programming)">Minification</a> (最小化) 的过程, 简单来说就是在不影响代码功能的情况下, 尽可能减少不必要的字符 (如空白, 换行等等), 缩短函数或变量的名字等等, 从而减小文件的大小, 便于传输.</p>
+<p>类似的, 在 <a href="https://en.wikipedia.org/wiki/Obfuscation_(software)">Obfuscation</a> (混淆) 这一技术中, 也会涉及到函数和变量的重命名. 不过二者的目标不尽相同, 混淆的目的主要是为了增加用户破解软件的难度, 除了重命名之外, 可能还会增加一些无意义的干扰代码.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../basics/multi-files-programming.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../basics/first-cmake.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../basics/multi-files-programming.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../basics/first-cmake.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

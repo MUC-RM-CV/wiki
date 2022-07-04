@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>CMake 基本使用 - RM-CV Wiki</title>
+        <title>初识 CMake - RM-CV Wiki</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -79,7 +79,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">前言</a></li><li class="chapter-item expanded "><a href="../basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/projects-and-builds.html"><strong aria-hidden="true">1.1.</strong> 项目与构建</a></li><li class="chapter-item expanded "><a href="../basics/multi-files-programming.html"><strong aria-hidden="true">1.2.</strong> C++ 多文件编程</a></li><li class="chapter-item expanded "><a href="../basics/first-cmake.html" class="active"><strong aria-hidden="true">1.3.</strong> CMake 基本使用</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="../tools/dev-with-vcpkg-cmake-win.html"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li></ol></li><li class="chapter-item expanded "><a href="../coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="../TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="../TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">前言</a></li><li class="chapter-item expanded "><a href="../basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/projects-and-builds.html"><strong aria-hidden="true">1.1.</strong> 项目与构建</a></li><li class="chapter-item expanded "><a href="../basics/multi-files-programming.html"><strong aria-hidden="true">1.2.</strong> C++ 多文件编程</a></li><li class="chapter-item expanded "><a href="../basics/about-libraries.html"><strong aria-hidden="true">1.3.</strong> 代码库的概念</a></li><li class="chapter-item expanded "><a href="../basics/first-cmake.html" class="active"><strong aria-hidden="true">1.4.</strong> 初识 CMake</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="../tools/dev-with-vcpkg-cmake-win.html"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li></ol></li><li class="chapter-item expanded "><a href="../coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="../TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="../TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,12 +146,16 @@
                     <main>
                         <h1 id="cmake-基本使用"><a class="header" href="#cmake-基本使用">CMake 基本使用</a></h1>
 <h2 id="构建工具"><a class="header" href="#构建工具">构建工具</a></h2>
-<p>在 <a href="./multi-files-programming.html#%E4%BD%BF%E7%94%A8%E5%A4%B4%E6%96%87%E4%BB%B6">上一节的例子</a> 中, 生成可执行文件 <code>main</code> 的过程, 就叫做<strong>构建</strong> (build).</p>
-<p>在这个过程中, 我们的 <em>目标</em> 是生成可执行程序 <code>main</code>.</p>
+<p>在 <a href="./multi-files-programming.html#%E4%BD%BF%E7%94%A8%E5%A4%B4%E6%96%87%E4%BB%B6">多文件的章节</a> 中, 生成可执行文件 <code>main</code> 的过程, 也叫做 <strong>构建</strong> (build) 可执行文件 <code>main</code> 的过程. 在这个过程中, 我们的 <em>目标</em> 是生成可执行程序 <code>main</code>.</p>
 <p>简单来说, 生成这个目标需要 <code>main.cpp</code>, <code>foo.h</code> 以及 <code>foo.cpp</code> 三个文件.</p>
 <blockquote>
 <p>更具体地说, 生成可执行程序 <code>main</code> <em>依赖</em> <code>main.o</code> 和 <code>foo.o</code> 两个目标文件, 而这两个目标文件, 又分别由对应的 <code>cpp</code> 文件生成.</p>
 </blockquote>
+<figure>
+  <img alt="示例依赖关系图"
+   src="./assets/example-dependency-diagram.svg" />
+  <figcaption>可执行程序 main 的依赖关系图</figcaption>
+</figure>
 <p>其中, <code>main.cpp</code> 和 <code>foo.cpp</code> 又依赖于 <code>foo.h</code> 文件 (因为包含了前二者包含了后者 <code>foo.h</code>).</p>
 <p>假如目标文件对应的 <code>cpp</code> 文件发生了更改 (或者其所包含的头文件发生了更改), 都需要重新生成相应的目标文件, 才能保证最终链接之后生成的可执行程序是最新的.</p>
 <p>不同于曾经的单文件, 现在要构建一个目标涉及到了多个文件. 有些问题需要解决:</p>
@@ -166,101 +170,11 @@
 <p>一些 IDE 会有自己的构建工具, 但对于初学者, 这个过程并不是那么明显. 往往, 用户将源代码添加进一个 &quot;项目&quot; 中, IDE 便将其视作生成该项目的依赖, 而不需用户显式指定. </p>
 </blockquote>
 <h2 id="使用外部库"><a class="header" href="#使用外部库">使用外部库</a></h2>
-<p>接下来将通过一个使用外部库的例子, 来介绍之后的内容. 该示例所使用的代码也可以在 <a href="https://gitlab.com/tsagaanbar/cpp-multi-file-demo/">gitlab.com/tsagaanbar/cpp-multi-file-demo</a> 查看.</p>
-<h3 id="提取代码成库"><a class="header" href="#提取代码成库">提取代码成库</a></h3>
-<p>假设我们现在有这样一个 C++ 文件 <a href="assets/2/single_file_demo.cpp">single_file_demo.cpp</a>, 发现其中的 <code>Date</code> 相关代码有复用的价值, 因此计划将其拆分出来, 单独成库.</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-
-auto is_leap(int y) {
-    return (y % 4 ==0 &amp;&amp; y % 100 != 0) || y % 400 == 0;
-}
-
-struct Date
-{
-    int y;
-    int m;
-    int d;
-    Date(int y_, int m_, int d_) : y(y_), m(m_), d(d_) {}
-};
-
-auto calc_days(Date const &amp; date) {
-    int days[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (is_leap(date.y)) {
-        days[2] = 29;
-    }
-    auto cnt = 0;
-    for (int i = 1; i &lt; date.m; ++i) {
-        cnt += days[i];
-    }
-    cnt += date.d;
-    return cnt;
-}
-
-int main() {
-    int y, m, d;
-    std::cin &gt;&gt; y &gt;&gt; m &gt;&gt; d;
-    Date d1(y, m, d);
-    std::cout &lt;&lt; calc_days(d1);
-}
-</code></pre>
-<p>具体来说, 可以将代码中相关的 <code>is_leap</code> 和 <code>calc_days</code> 等函数, 变成 <code>Date</code> 类的成员方法. 结果如下:</p>
-<p><a href="assets/2/Date/Date.hpp">Date/Date.hpp</a></p>
-<pre><code class="language-cpp">// Date.hpp
-
-// 头文件需要进行保护，目的是避免重复包含
-
-#ifndef DATE_HPP
-#define DATE_HPP
-
-// 头文件中不能包含具体的定义
-// 由于头文件可能会被多个 cpp （编译单元）包含
-// 如果头文件中包含具体的定义，这些编译单元在最后链接过程中，会出现多个重复的符号
-// 如果确需在头文件中包含具体函数的定义，需要声明为 inline（内联）
-
-class Date {
-    int y;
-    int m;
-    int d;
-    bool is_leap(int year) {
-        return (year % 4 ==0 &amp;&amp; year % 100 != 0) || year % 400 == 0;
-    }
-
-public:
-    // 类的声明中直接书写的函数是 inline 的
-    Date(int y_, int m_, int d_) : y(y_), m(m_), d(d_) {}
-
-    // 也可以只写声明，再在 cpp 文件中实现这个函数
-    int get_days();
-};
-
-
-#endif // DATE_HPP
-</code></pre>
-<p><a href="assets/2/Date/Date.cpp">Date/Date.cpp</a></p>
-<pre><code class="language-cpp">// Date.cpp
-
-// 由于需要实现 Date.hpp 中声明的函数，需要包含 Date.hpp
-
-#include &quot;Date.hpp&quot;
-
-int Date::get_days()
-{
-    int days[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (is_leap(this-&gt;y)) {
-        days[2] = 29;
-    }
-    auto cnt = 0;
-    for (int i = 1; i &lt; this-&gt;m; ++i) {
-        cnt += days[i];
-    }
-    cnt += this-&gt;d;
-    return cnt;
-}
-
-</code></pre>
-<h3 id="调用外部库"><a class="header" href="#调用外部库">调用外部库</a></h3>
+<p>以使用外部库为例, 这里使用上一节中整理出来的 <code>Date</code> 库作为例子.</p>
 <p>那么该怎么调用这个外部库呢? 有多种情况, 一般来讲, 应当将该库的源代码与项目一同进行编译; 也有的时候, 库的开发者不提供源代码, 只有编译好的二进制文件和对应的头文件.</p>
 <p>不管属于哪种情况, 都需要包含对应的头文件. 前者需要在链接时提供需要的目标文件, 后者则需要指定需要链接的库文件.</p>
+<h3 id="头文件包含"><a class="header" href="#头文件包含">头文件包含</a></h3>
+<p>首先, 要想使用一个库, 头文件是不可少的. 它能够告诉我们能够使用符号, 并且能够帮助我们顺利完成翻译单元的编译, 从而生成目标文件.</p>
 <p>在编译这些使用了外部库的项目时, 由于需要包含外部的头文件, 而外部头文件的位置则是千差万别, 因此一般需要给编译器指定头文件搜索的路径. </p>
 <blockquote>
 <p>关于 <code>#include</code> 命令的搜索范围: 当使用双引号 <code>&quot;&quot;</code> 包含头文件时, 编译器首先查找当前工作目录或源代码目录, 然后再在标准位置查找. 而使用尖括号 <code>&lt;&gt;</code> 时, 编译器将在系统的头文件目录中查找. </p>
@@ -276,14 +190,40 @@ int main() {
     std::cout &lt;&lt; d1.get_days();
 }
 </code></pre>
+<h3 id="编译和链接"><a class="header" href="#编译和链接">编译和链接</a></h3>
 <p>假设 <code>Date.hpp</code> 和 <code>Date.cpp</code> 都位于和 <code>demo.cpp</code> 同目录下的 <code>Date</code> 目录中:</p>
+<blockquote>
+<p>下面的这些命令用于示范手动构建 (使用源码的外部库) 的过程, 读者不一定要亲自执行.</p>
+</blockquote>
+<p>切换到 <code>demo.cpp</code> 所在目录下.</p>
+<p><strong>首先</strong> 编译 <code>demo.cpp</code>, 需要指定头文件搜索路径.</p>
 <pre><code class="language-console">$ c++ demo.cpp -c -o demo.o -I ./Date   # 编译 demo.cpp
-$ c++ Date/Date.cpp -c -o ./Date.o      # 编译 Date.cpp
-$ c++ demo.o Date.o -o demo             # 链接生成可执行程序 demo
 </code></pre>
+<p>执行这个命令后, 将在当前目录下得到 <code>demo.o</code> 这一目标文件.</p>
+<p><strong>接下来</strong> 编译 <code>Date.cpp</code>. 由于 <code>Date.cpp</code> 和 <code>Date.hpp</code> 处在同一目录下, 所以不需要指定头文件搜索路径.</p>
+<pre><code class="language-console">$ c++ Date/Date.cpp -c -o ./Date.o      # 编译 Date.cpp
+</code></pre>
+<p>执行这个命令后, 将在当前目录下得到 <code>Date.o</code> 这一目标文件.</p>
+<p><strong>最后</strong>, 将得到的两个目标文件链接起来, 生成最后的可执行文件.</p>
+<pre><code class="language-console">$ c++ demo.o Date.o -o demo             # 链接生成可执行程序 demo
+</code></pre>
+<p>需要注意的是, 上述命令的写法并没有体现库的使用, 只是手动的根据依赖情况分别编译源文件, 最后链接生成可执行文件.</p>
+<p>现实世界中使用的很多外部库, 通常由包管理器进行管理. 库的头文件搜索路径, 以及要链接的库文件, 通常由包管理器负责记录. 通常有相应的程序, 可以根据这些记录来自动化生成编译命令, 而无需手动输入.</p>
 <h2 id="cmake"><a class="header" href="#cmake">CMake</a></h2>
-<p>经过上述的例子, 可见手动完成构建是很复杂的. 当然, 可以使用构建工具, 并编写 Make 等构建工具的脚本, 但是由于其适用性不广, 以下只介绍使用 CMake 的方法.</p>
+<p>经过上述的例子, 可见手动完成构建是很复杂的. 当然, 可以使用构建工具 (如 GNU Make), 并编写对应的脚本, 但是由于其使用起来仍较为复杂, 不够抽象 (仍需编写具体的规则), 以下只介绍使用 CMake 的方法.</p>
+<blockquote>
+<p>接下来的内容只概念性的介绍 CMake 的使用. 关于具体使用, 见下一节内容.</p>
+</blockquote>
 <p>使用 CMake 这样一个构建管理工具, 只需编写一个 <code>CMakeLists.txt</code> 文件, 便可以生成用于不同构建工具的脚本. </p>
+<p>最简单的 CMake 命令, 即是根据一个源文件, 生成一个可执行程序.</p>
+<pre><code class="language-cmake">add_executable(single_file_demo &quot;single_file_demo.cpp&quot;)
+</code></pre>
+<p>而对于本节中的示例项目, 编写 CMake 脚本也并不复杂.</p>
+<figure>
+  <img alt="CMake 目标依赖关系图"
+   src="./assets/example-cmake-targets-diagram.svg" />
+  <figcaption>CMake 项目中目标的依赖关系图</figcaption>
+</figure>
 <p>首先, 为 <code>Date</code> 库编写一个 CMake 脚本. 下面的例子定义了一个名为 <code>Date</code> 的生成 &quot;库 (library)&quot; 的目标.</p>
 <p><a href="assets/2/Date/CMakeLists.txt">Date/CMakeLists.txt</a></p>
 <pre><code class="language-cmake">project(My-Date)
@@ -299,10 +239,11 @@ add_library(Date &quot;Date.hpp&quot; &quot;Date.cpp&quot;)
 # 设定库目标的包含路径
 target_include_directories(Date PUBLIC .)
 </code></pre>
-<p>之后, 如果要使用这个库, 便不再需要逐一指明目标 demo 需要的源文件: 因为之前已经定义了生成库目标的规则, 之后只需要包含对应的目录 (作为子项目引入), 即可直接使用这个目标:</p>
+<p>之后, 如果要使用这个库, 便只需要在 CMake 中使用 <code>add_subdirectory</code> 命令包含该目录 (作为子项目引入), 即可直接使用这个目标:</p>
 <p><a href="assets/2/CMakeLists.txt">CMakeLists.txt</a></p>
 <pre><code class="language-cmake">project(CPP-Multi-File-Demo)
 
+# 提取库文件之前, 单文件的示例程序
 add_executable(single_file_demo &quot;single_file_demo.cpp&quot;)
 
 # 子目录 Date 中的 CMakeLists.txt 中包含生成 Date 这个目标, 引入后便可以使用
@@ -314,17 +255,23 @@ add_executable(demo &quot;demo.cpp&quot;)
 # 将 demo 和 &quot;Date&quot; 库进行链接
 target_link_libraries(demo Date)
 </code></pre>
-<blockquote>
-<p>如果 <code>add_library</code> 时给出 <code>OBJECT</code> 参数, CMake 将不会生成库文件, 效果等同于逐一指明目标 <code>demo</code> 需要的源文件.</p>
+<p>需要注意, 和上边手动操作时的示范不同, 这里 CMake 在构建时会真正生成一个库文件.</p>
+<p>CMake 也会自动解析出项目之间的依赖. 比如:</p>
+<ul>
+<li>编译 <code>demo.cpp</code> 需要 <code>Date</code> 库的包含目录 (由 <code>target_include_directories</code> 命令得到);</li>
+<li>生成 <code>demo</code> 需要 <code>demo.o</code> 和 <code>Date</code> 库, 即 <code>Date.lib</code> (Windows) 或者 <code>libDate.a</code> (Unix);</li>
+<li>...</li>
+</ul>
+<p>如果 <code>add_library</code> 时使用 <code>OBJECT</code> 选项, CMake 将不会生成库文件, 而是将给出的源文件视作一个集合, 然后编译这些翻译单元为目标文件. 对于依赖它的目标, 则使用这些目标文件一并链接. 效果类似于逐一指明可执行程序目标需要的源文件, 但是使用 <code>OBJECT</code> 可以让 CMake 不去为每个可执行程序目标重复编译这些翻译单元.</p>
 <pre><code class="language-cmake">add_library(Date OBJECT &quot;Date.hpp&quot; &quot;Date.cpp&quot;)
 </code></pre>
-</blockquote>
+<p>自然, CMake 也可以生成动态库. 不过由于细节较多, 这里暂时不作展开.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../basics/multi-files-programming.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../basics/about-libraries.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                             <a rel="next" href="../tools/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
@@ -336,7 +283,7 @@ target_link_libraries(demo Date)
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../basics/multi-files-programming.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../basics/about-libraries.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                     <a rel="next" href="../tools/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">

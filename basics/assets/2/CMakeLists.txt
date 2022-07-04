@@ -1,5 +1,6 @@
 project(CPP-Multi-File-Demo)
 
+# 提取库文件之前, 单文件的示例程序
 add_executable(single_file_demo "single_file_demo.cpp")
 
 # 子目录 Date 中的 CMakeLists.txt 中包含生成 Date 这个目标, 引入后便可以使用

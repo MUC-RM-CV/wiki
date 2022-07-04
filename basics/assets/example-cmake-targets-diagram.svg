@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="361px"
+	height="261px" viewBox="-0.5 -0.5 361 261" style="background-color: rgb(255, 255, 255);">
+	<defs>
+		<style>
+			path {
+				stroke: black;
+				stroke-miterlimit: 10;
+			}
+
+			rect {
+				fill: white;
+				stroke: black;
+			}
+
+			text {
+				font-family: sans-serif;
+				fill: black;
+				font-size: 11px;
+				text-anchor: middle;
+			}
+		</style>
+	</defs>
+	<g>
+		<rect x="80" y="200" width="120" height="60" pointer-events="all" />
+		<g><text x="139.5" y="234.5">Date.hpp</text></g>
+		<rect x="240" y="200" width="120" height="60" pointer-events="all" />
+		<g><text x="299.5" y="234.5">Date.cpp</text></g>
+		<path d="M 220 160 L 220 180 L 140 180 L 140 193.63" fill="none" pointer-events="stroke" />
+		<path d="M 140 198.88 L 136.5 191.88 L 140 193.63 L 143.5 191.88 Z" fill="black" pointer-events="all" />
+		<path d="M 220 160 L 220 180 L 300 180 L 300 193.63" fill="none" pointer-events="stroke" />
+		<path d="M 300 198.88 L 296.5 191.88 L 300 193.63 L 303.5 191.88 Z" fill="black" pointer-events="all" />
+		<rect x="160" y="100" width="120" height="60" pointer-events="all" />
+		<g><text x="219.5" y="127.5">Date</text><text x="219.5" y="141.5">(library)</text></g>
+		<rect x="0" y="100" width="120" height="60" pointer-events="all" />
+		<g><text x="59.5" y="134.5">demo.cpp</text></g>
+		<path d="M 140 60 L 140 80 L 60 80 L 60 93.63" fill="none" pointer-events="stroke" />
+		<path d="M 60 98.88 L 56.5 91.88 L 60 93.63 L 63.5 91.88 Z" fill="black" pointer-events="all" />
+		<path d="M 140 60 L 140 80 L 220 80 L 220 93.63" fill="none" pointer-events="stroke" />
+		<path d="M 220 98.88 L 216.5 91.88 L 220 93.63 L 223.5 91.88 Z" fill="black" pointer-events="all" />
+		<rect x="80" y="0" width="120" height="60" pointer-events="all" />
+		<g><text x="139.5" y="27.5">demo</text><text x="139.5" y="41.5">(executable)</text></g>
+	</g>
+</svg>
