@@ -2,13 +2,17 @@
 
 ## 构建工具
 
-在 [上一节的例子](./multi-files-programming.md#使用头文件) 中, 生成可执行文件 `main` 的过程, 就叫做**构建** (build).
-
-在这个过程中, 我们的 *目标* 是生成可执行程序 `main`.
+在 [多文件的章节](./multi-files-programming.md#使用头文件) 中, 生成可执行文件 `main` 的过程, 也叫做 **构建** (build) 可执行文件 `main` 的过程. 在这个过程中, 我们的 *目标* 是生成可执行程序 `main`.
 
 简单来说, 生成这个目标需要 `main.cpp`, `foo.h` 以及 `foo.cpp` 三个文件.
 
 > 更具体地说, 生成可执行程序 `main` *依赖* `main.o` 和 `foo.o` 两个目标文件, 而这两个目标文件, 又分别由对应的 `cpp` 文件生成.
+
+<figure>
+  <img alt="示例依赖关系图"
+   src="./assets/example-dependency-diagram.svg" />
+  <figcaption>可执行程序 main 的依赖关系图</figcaption>
+</figure>
 
 其中, `main.cpp` 和 `foo.cpp` 又依赖于 `foo.h` 文件 (因为包含了前二者包含了后者 `foo.h`).
 
@@ -28,35 +32,24 @@
 
 ## 使用外部库
 
-接下来将通过一个使用外部库的例子, 来介绍之后的内容. 该示例所使用的代码也可以在 [gitlab.com/tsagaanbar/cpp-multi-file-demo](https://gitlab.com/tsagaanbar/cpp-multi-file-demo/) 查看.
+以使用外部库为例, 这里使用上一节中整理出来的 `Date` 库作为例子.
 
-### 提取代码成库
 
-假设我们现在有这样一个 C++ 文件 [single_file_demo.cpp](assets/2/single_file_demo.cpp), 发现其中的 `Date` 相关代码有复用的价值, 因此计划将其拆分出来, 单独成库.
 
-```cpp
-{{#include assets/2/single_file_demo.cpp}}
-```
 
-具体来说, 可以将代码中相关的 `is_leap` 和 `calc_days` 等函数, 变成 `Date` 类的成员方法. 结果如下:
 
-[Date/Date.hpp](assets/2/Date/Date.hpp)
 
-```cpp
-{{#include assets/2/Date/Date.hpp}}
-```
 
-[Date/Date.cpp](assets/2/Date/Date.cpp)
 
-```cpp
-{{#include assets/2/Date/Date.cpp}}
-```
 
-### 调用外部库
 
 那么该怎么调用这个外部库呢? 有多种情况, 一般来讲, 应当将该库的源代码与项目一同进行编译; 也有的时候, 库的开发者不提供源代码, 只有编译好的二进制文件和对应的头文件.
 
 不管属于哪种情况, 都需要包含对应的头文件. 前者需要在链接时提供需要的目标文件, 后者则需要指定需要链接的库文件.
+
+### 头文件包含
+
+首先, 要想使用一个库, 头文件是不可少的. 它能够告诉我们能够使用符号, 并且能够帮助我们顺利完成翻译单元的编译, 从而生成目标文件.
 
 在编译这些使用了外部库的项目时, 由于需要包含外部的头文件, 而外部头文件的位置则是千差万别, 因此一般需要给编译器指定头文件搜索的路径. 
 
@@ -68,19 +61,61 @@
 {{#include assets/2/demo.cpp}}
 ```
 
+### 编译和链接
+
 假设 `Date.hpp` 和 `Date.cpp` 都位于和 `demo.cpp` 同目录下的 `Date` 目录中:
+
+> 下面的这些命令用于示范手动构建 (使用源码的外部库) 的过程, 读者不一定要亲自执行.
+
+切换到 `demo.cpp` 所在目录下.
+
+**首先** 编译 `demo.cpp`, 需要指定头文件搜索路径.
 
 ```console
 $ c++ demo.cpp -c -o demo.o -I ./Date   # 编译 demo.cpp
+```
+
+执行这个命令后, 将在当前目录下得到 `demo.o` 这一目标文件.
+
+**接下来** 编译 `Date.cpp`. 由于 `Date.cpp` 和 `Date.hpp` 处在同一目录下, 所以不需要指定头文件搜索路径.
+
+```console
 $ c++ Date/Date.cpp -c -o ./Date.o      # 编译 Date.cpp
+```
+
+执行这个命令后, 将在当前目录下得到 `Date.o` 这一目标文件.
+
+**最后**, 将得到的两个目标文件链接起来, 生成最后的可执行文件.
+
+```console
 $ c++ demo.o Date.o -o demo             # 链接生成可执行程序 demo
 ```
 
+需要注意的是, 上述命令的写法并没有体现库的使用, 只是手动的根据依赖情况分别编译源文件, 最后链接生成可执行文件.
+
+现实世界中使用的很多外部库, 通常由包管理器进行管理. 库的头文件搜索路径, 以及要链接的库文件, 通常由包管理器负责记录. 通常有相应的程序, 可以根据这些记录来自动化生成编译命令, 而无需手动输入.
+
 ## CMake
 
-经过上述的例子, 可见手动完成构建是很复杂的. 当然, 可以使用构建工具, 并编写 Make 等构建工具的脚本, 但是由于其适用性不广, 以下只介绍使用 CMake 的方法.
+经过上述的例子, 可见手动完成构建是很复杂的. 当然, 可以使用构建工具 (如 GNU Make), 并编写对应的脚本, 但是由于其使用起来仍较为复杂, 不够抽象 (仍需编写具体的规则), 以下只介绍使用 CMake 的方法.
+
+> 接下来的内容只概念性的介绍 CMake 的使用. 关于具体使用, 见下一节内容.
 
 使用 CMake 这样一个构建管理工具, 只需编写一个 `CMakeLists.txt` 文件, 便可以生成用于不同构建工具的脚本. 
+
+最简单的 CMake 命令, 即是根据一个源文件, 生成一个可执行程序.
+
+```cmake
+add_executable(single_file_demo "single_file_demo.cpp")
+```
+
+而对于本节中的示例项目, 编写 CMake 脚本也并不复杂.
+
+<figure>
+  <img alt="CMake 目标依赖关系图"
+   src="./assets/example-cmake-targets-diagram.svg" />
+  <figcaption>CMake 项目中目标的依赖关系图</figcaption>
+</figure>
 
 首先, 为 `Date` 库编写一个 CMake 脚本. 下面的例子定义了一个名为 `Date` 的生成 "库 (library)" 的目标.
 
@@ -90,7 +125,7 @@ $ c++ demo.o Date.o -o demo             # 链接生成可执行程序 demo
 {{#include assets/2/Date/CMakeLists.txt}}
 ```
 
-之后, 如果要使用这个库, 便不再需要逐一指明目标 demo 需要的源文件: 因为之前已经定义了生成库目标的规则, 之后只需要包含对应的目录 (作为子项目引入), 即可直接使用这个目标:
+之后, 如果要使用这个库, 便只需要在 CMake 中使用 `add_subdirectory` 命令包含该目录 (作为子项目引入), 即可直接使用这个目标:
 
 [CMakeLists.txt](assets/2/CMakeLists.txt)
 
@@ -98,8 +133,18 @@ $ c++ demo.o Date.o -o demo             # 链接生成可执行程序 demo
 {{#include assets/2/CMakeLists.txt}}
 ```
 
-> 如果 `add_library` 时给出 `OBJECT` 参数, CMake 将不会生成库文件, 效果等同于逐一指明目标 `demo` 需要的源文件.
-> 
-> ```cmake
-> add_library(Date OBJECT "Date.hpp" "Date.cpp")
-> ```
+需要注意, 和上边手动操作时的示范不同, 这里 CMake 在构建时会真正生成一个库文件.
+
+CMake 也会自动解析出项目之间的依赖. 比如:
+
+- 编译 `demo.cpp` 需要 `Date` 库的包含目录 (由 `target_include_directories` 命令得到);
+- 生成 `demo` 需要 `demo.o` 和 `Date` 库, 即 `Date.lib` (Windows) 或者 `libDate.a` (Unix);
+- ...
+
+如果 `add_library` 时使用 `OBJECT` 选项, CMake 将不会生成库文件, 而是将给出的源文件视作一个集合, 然后编译这些翻译单元为目标文件. 对于依赖它的目标, 则使用这些目标文件一并链接. 效果类似于逐一指明可执行程序目标需要的源文件, 但是使用 `OBJECT` 可以让 CMake 不去为每个可执行程序目标重复编译这些翻译单元.
+ 
+```cmake
+add_library(Date OBJECT "Date.hpp" "Date.cpp")
+```
+ 
+自然, CMake 也可以生成动态库. 不过由于细节较多, 这里暂时不作展开.
