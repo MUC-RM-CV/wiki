@@ -128,26 +128,18 @@ cmake \
 >
 > 如果有其他需要转义的字符，也需要根据 IDE 配置参数的方式，决定是否需要转义。比如，如果 IDE 使用配置文件的形式进行配置，则可能需要按照字符串字面量的转义方式对特殊符号进行处理；假如是在图形界面中输入的，则一般不需要对特殊符号进行转义。
 
-### Visual Studio Code
+### Visual Studio Code + CMake Tools
 
 VS Code 中的配置实际上是修改 CMake Tools 插件的配置，关于插件的使用见上一篇博文。
 
+在 VS Code 的设置中搜索 "CMake: Configure args" 选项，点击 Add Item 添加上一节中提到的参数。
+
 ![在 VS Code 的设置中搜索 CMake: Configure args 选项，点击 Add Item 添加工具链路径的参数](https://img-blog.csdnimg.cn/c460b12a612645748cc3da1fab9c80d3.png)
 
-在 VS Code 的设置中搜索 CMake: Configure args 选项，点击 Add Item 添加上一节中提到的参数。
 
-这个选项也可以设置成目录的（而非全局的），也就是在工作目录下新建一个 `.vscode` 目录，在其中新建一个 `settings.json`，并在其中添加一个键名为 `cmake.configureArgs` 、值为一个列表的键值对。
+这个选项也可以设置成目录的 (而非全局的), 也就是在工作目录下新建一个 `.vscode` 目录, 在其中新建一个 `settings.json`, 并确保其中有一个键名为 `cmake.configureArgs` 的列表, 其中包含相应的要传递给 CMake 的选项.
 
-列表中添加一个定义 `CMAKE_TOOLCHAIN_FILE` 变量的选项：
-
-```json
-"cmake.configureArgs": [
-  "-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE",
-  "-DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
-]
-```
-
-最后的 `settings.json` 文件类似如下：
+向列表中添加一个定义 `CMAKE_TOOLCHAIN_FILE` 变量的选项, 而最后的 `.vscode/settings.json` 文件类似如下:
 
 ```json
 {
@@ -158,15 +150,19 @@ VS Code 中的配置实际上是修改 CMake Tools 插件的配置，关于插�
 }
 ```
 
-其他的 IDE 配置类似。
 
 #### Visual Studio
 
-在 Visual Studio 的搜索中 查找 CMake Settings for Project
+确保在 Visual Studio 中打开的是一个 CMake 项目.
 
-![在 Visual Studio 的搜索中 查找 CMake Settings for Project](https://img-blog.csdnimg.cn/8893a0b749d34adfb1ed3c57fcf1c6e2.png)
+在 "项目" 菜单里选择 "`<项目名>` 的 CMake 设置", 之后找到 "命令参数", 并在其中添加要使用的选项.
 
-这会在 CMake 项目下生成一个 `CMakeSettings.json` 文件，我们可以在某个配置（比如 x64-Debug）下的 `cmakeCommandArgs` 里添加相应的参数：
+![在这里插入图片描述](https://img-blog.csdnimg.cn/6d22334d784f4efca3e4ddf273558d9d.png#pic_center)
+
+
+这会在 CMake 项目下生成一个 `CMakeSettings.json` 文件. 在上述图形界面里的修改都会同步存储到这个文件里.
+
+我们可以在某个配置 (比如 `x64-Debug`) 下的 `cmakeCommandArgs` 里添加相应的参数:
 
 ```json
 {
@@ -188,6 +184,6 @@ VS Code 中的配置实际上是修改 CMake Tools 插件的配置，关于插�
 
 #### CLion
 
-CLion 的配置也是类似，在“文件（Files）”->“设置（Settings）”->“构建、执行、部署（Build, Execution, Deplyment）”->“CMake” 中，在某个配置中的 CMake options 中添加相应的 `-D` 参数。
+CLion 的配置也是类似，在 "文件 (Files)" → "设置 (Settings)" → "构建, 执行, 部署 (Build, Execution, Deplyment)" → "CMake" 中, 在某个配置中的 CMake options 中添加要传递给 CMake 的选项.
 
 ![CLion 的配置说明图](https://img-blog.csdnimg.cn/6897fe5c56234afdb0fb13f6f6024296.png)
