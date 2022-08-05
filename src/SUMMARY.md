@@ -11,6 +11,7 @@
 - [开发环境配置和使用](./tools/README.md)
     - [Visual Studio Code 中 CMake 插件的基本使用](./tools/vscode-cmake-extension.md)
     - [Windows 下使用 vcpkg + CMake 进行开发](./tools/dev-with-vcpkg-cmake-win.md)
+    - [使用 SSH 连接到 GitHub](./tools/connecting-to-github-with-ssh.md)
 
 - [编程技巧](./coding-tips/README.md)
     - [C++ 浮点数转为字符串](./coding-tips/float-to-string.md)
