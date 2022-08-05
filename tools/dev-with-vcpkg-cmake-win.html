@@ -79,7 +79,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">前言</a></li><li class="chapter-item expanded "><a href="../basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/projects-and-builds.html"><strong aria-hidden="true">1.1.</strong> 项目与构建</a></li><li class="chapter-item expanded "><a href="../basics/multi-files-programming.html"><strong aria-hidden="true">1.2.</strong> C++ 多文件编程</a></li><li class="chapter-item expanded "><a href="../basics/about-libraries.html"><strong aria-hidden="true">1.3.</strong> 代码库的概念</a></li><li class="chapter-item expanded "><a href="../basics/first-cmake.html"><strong aria-hidden="true">1.4.</strong> 初识 CMake</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="../tools/dev-with-vcpkg-cmake-win.html" class="active"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li></ol></li><li class="chapter-item expanded "><a href="../coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="../TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="../TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">前言</a></li><li class="chapter-item expanded "><a href="../basics/index.html"><strong aria-hidden="true">1.</strong> 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/projects-and-builds.html"><strong aria-hidden="true">1.1.</strong> 项目与构建</a></li><li class="chapter-item expanded "><a href="../basics/multi-files-programming.html"><strong aria-hidden="true">1.2.</strong> C++ 多文件编程</a></li><li class="chapter-item expanded "><a href="../basics/about-libraries.html"><strong aria-hidden="true">1.3.</strong> 代码库的概念</a></li><li class="chapter-item expanded "><a href="../basics/first-cmake.html"><strong aria-hidden="true">1.4.</strong> 初识 CMake</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/index.html"><strong aria-hidden="true">2.</strong> 开发环境配置和使用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/vscode-cmake-extension.html"><strong aria-hidden="true">2.1.</strong> Visual Studio Code 中 CMake 插件的基本使用</a></li><li class="chapter-item expanded "><a href="../tools/dev-with-vcpkg-cmake-win.html" class="active"><strong aria-hidden="true">2.2.</strong> Windows 下使用 vcpkg + CMake 进行开发</a></li><li class="chapter-item expanded "><a href="../tools/connecting-to-github-with-ssh.html"><strong aria-hidden="true">2.3.</strong> 使用 SSH 连接到 GitHub</a></li></ol></li><li class="chapter-item expanded "><a href="../coding-tips/index.html"><strong aria-hidden="true">3.</strong> 编程技巧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../coding-tips/float-to-string.html"><strong aria-hidden="true">3.1.</strong> C++ 浮点数转为字符串</a></li></ol></li><li class="chapter-item expanded "><a href="../TX2/index.html"><strong aria-hidden="true">4.</strong> TX2 使用笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../TX2/new-to-tx2.html"><strong aria-hidden="true">4.1.</strong> 初识 TX2</a></li><li class="chapter-item expanded "><a href="../TX2/using-proxy.html"><strong aria-hidden="true">4.2.</strong> 在 TX2 上使用代理</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -231,18 +231,12 @@ target_link_libraries(main fmt::fmt)
 <p>需要注意，如果路径中包含空格，在 Shell 需要使用引号将路径包裹起来，以便Shell 将其视作一个整体传递给 CMake 程序。但如果在 IDE 中，则需要根据具体情况判断是否需要使用引号将路径包裹起来（即，IDE 在传递参数时，是直接将字符串传入给可执行程序，还是将其拼接在命令的最后并通过 Shell 界面执行命令）。</p>
 <p>如果有其他需要转义的字符，也需要根据 IDE 配置参数的方式，决定是否需要转义。比如，如果 IDE 使用配置文件的形式进行配置，则可能需要按照字符串字面量的转义方式对特殊符号进行处理；假如是在图形界面中输入的，则一般不需要对特殊符号进行转义。</p>
 </blockquote>
-<h3 id="visual-studio-code"><a class="header" href="#visual-studio-code">Visual Studio Code</a></h3>
+<h3 id="visual-studio-code--cmake-tools"><a class="header" href="#visual-studio-code--cmake-tools">Visual Studio Code + CMake Tools</a></h3>
 <p>VS Code 中的配置实际上是修改 CMake Tools 插件的配置，关于插件的使用见上一篇博文。</p>
+<p>在 VS Code 的设置中搜索 &quot;CMake: Configure args&quot; 选项，点击 Add Item 添加上一节中提到的参数。</p>
 <p><img src="https://img-blog.csdnimg.cn/c460b12a612645748cc3da1fab9c80d3.png" alt="在 VS Code 的设置中搜索 CMake: Configure args 选项，点击 Add Item 添加工具链路径的参数" /></p>
-<p>在 VS Code 的设置中搜索 CMake: Configure args 选项，点击 Add Item 添加上一节中提到的参数。</p>
-<p>这个选项也可以设置成目录的（而非全局的），也就是在工作目录下新建一个 <code>.vscode</code> 目录，在其中新建一个 <code>settings.json</code>，并在其中添加一个键名为 <code>cmake.configureArgs</code> 、值为一个列表的键值对。</p>
-<p>列表中添加一个定义 <code>CMAKE_TOOLCHAIN_FILE</code> 变量的选项：</p>
-<pre><code class="language-json">&quot;cmake.configureArgs&quot;: [
-  &quot;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE&quot;,
-  &quot;-DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake&quot;
-]
-</code></pre>
-<p>最后的 <code>settings.json</code> 文件类似如下：</p>
+<p>这个选项也可以设置成目录的 (而非全局的), 也就是在工作目录下新建一个 <code>.vscode</code> 目录, 在其中新建一个 <code>settings.json</code>, 并确保其中有一个键名为 <code>cmake.configureArgs</code> 的列表, 其中包含相应的要传递给 CMake 的选项.</p>
+<p>向列表中添加一个定义 <code>CMAKE_TOOLCHAIN_FILE</code> 变量的选项, 而最后的 <code>.vscode/settings.json</code> 文件类似如下:</p>
 <pre><code class="language-json">{
   &quot;cmake.configureArgs&quot;: [
     &quot;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE&quot;,
@@ -250,11 +244,12 @@ target_link_libraries(main fmt::fmt)
   ]
 }
 </code></pre>
-<p>其他的 IDE 配置类似。</p>
 <h4 id="visual-studio"><a class="header" href="#visual-studio">Visual Studio</a></h4>
-<p>在 Visual Studio 的搜索中 查找 CMake Settings for Project</p>
-<p><img src="https://img-blog.csdnimg.cn/8893a0b749d34adfb1ed3c57fcf1c6e2.png" alt="在 Visual Studio 的搜索中 查找 CMake Settings for Project" /></p>
-<p>这会在 CMake 项目下生成一个 <code>CMakeSettings.json</code> 文件，我们可以在某个配置（比如 x64-Debug）下的 <code>cmakeCommandArgs</code> 里添加相应的参数：</p>
+<p>确保在 Visual Studio 中打开的是一个 CMake 项目.</p>
+<p>在 &quot;项目&quot; 菜单里选择 &quot;<code>&lt;项目名&gt;</code> 的 CMake 设置&quot;, 之后找到 &quot;命令参数&quot;, 并在其中添加要使用的选项.</p>
+<p><img src="https://img-blog.csdnimg.cn/6d22334d784f4efca3e4ddf273558d9d.png#pic_center" alt="在这里插入图片描述" /></p>
+<p>这会在 CMake 项目下生成一个 <code>CMakeSettings.json</code> 文件. 在上述图形界面里的修改都会同步存储到这个文件里.</p>
+<p>我们可以在某个配置 (比如 <code>x64-Debug</code>) 下的 <code>cmakeCommandArgs</code> 里添加相应的参数:</p>
 <pre><code class="language-json">{
   &quot;configurations&quot;: [
     {
@@ -272,7 +267,7 @@ target_link_libraries(main fmt::fmt)
 }
 </code></pre>
 <h4 id="clion"><a class="header" href="#clion">CLion</a></h4>
-<p>CLion 的配置也是类似，在“文件（Files）”-&gt;“设置（Settings）”-&gt;“构建、执行、部署（Build, Execution, Deplyment）”-&gt;“CMake” 中，在某个配置中的 CMake options 中添加相应的 <code>-D</code> 参数。</p>
+<p>CLion 的配置也是类似，在 &quot;文件 (Files)&quot; → &quot;设置 (Settings)&quot; → &quot;构建, 执行, 部署 (Build, Execution, Deplyment)&quot; → &quot;CMake&quot; 中, 在某个配置中的 CMake options 中添加要传递给 CMake 的选项.</p>
 <p><img src="https://img-blog.csdnimg.cn/6897fe5c56234afdb0fb13f6f6024296.png" alt="CLion 的配置说明图" /></p>
 
                     </main>
@@ -282,7 +277,7 @@ target_link_libraries(main fmt::fmt)
                             <a rel="prev" href="../tools/vscode-cmake-extension.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../coding-tips/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../tools/connecting-to-github-with-ssh.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -294,7 +289,7 @@ target_link_libraries(main fmt::fmt)
                     <a rel="prev" href="../tools/vscode-cmake-extension.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../coding-tips/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../tools/connecting-to-github-with-ssh.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
