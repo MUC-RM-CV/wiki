@@ -147,88 +147,14 @@
                         <h1 id="在-tx2-上使用代理"><a class="header" href="#在-tx2-上使用代理">在 TX2 上使用代理</a></h1>
 <p>在 TX2 上使用代理和在其他 Linux 系统上是类似的。</p>
 <p>也许读者在其他平台有过使用代理的经历，那样也请暂时放下已有的经验，参考一下本教程的方法。</p>
-<p>本教程将会介绍 <a href="https://github.com/Dreamacro/clash">Clash</a> 这样一款基于规则的代理软件。其支持多种协议，如 VMess、Shadowsocks、Trojan 协议。</p>
 <h2 id="订阅和订阅链接"><a class="header" href="#订阅和订阅链接">订阅和订阅链接</a></h2>
 <p>一般的，在用户购买服务后，网络代理服务商需要将代理服务器的连接信息提供给用户，一般为某种代理软件所支持的配置文件格式，且通常会提供适用于多种软件的配置文件。</p>
-<p>此外，这些信息一般是以“订阅”的形式提供的。我们通过“订阅链接”，可以随时获取到最新的代理服务器信息。比如，我们可以通过“Clash 订阅链接”获得到适用于 Clash 的配置文件。</p>
+<p>此外，这些信息一般是以“订阅”的形式提供的。我们通过“订阅链接”，可以随时获取到最新的代理服务器信息。</p>
 <p>需要注意，一定要<strong>保护好自己的订阅链接</strong>，不得在公共网络上明文传输。</p>
 <h2 id="tx2-本机上运行代理软件"><a class="header" href="#tx2-本机上运行代理软件">TX2 本机上运行代理软件</a></h2>
-<p>读者可能已经使用过类似 <a href="https://github.com/Fndroid/clash_for_windows_pkg">Clash for Windows</a> 这样的图形化软件。<a href="https://github.com/Dreamacro/clash">Clash</a> 本身是一款 CLI 程序（命令行界面程序），但是有很多应用程序为其设计了图形化界面前端。</p>
-<blockquote>
-<p>至于为什么使用 Clash 命令行程序，是因为很多图形前端没有适用于 ARM64 架构（也就是 TX2 处理器的架构）的版本。</p>
-</blockquote>
-<p>接下来，将介绍 <a href="https://github.com/Dreamacro/clash">Clash</a> 的使用。</p>
-<h3 id="下载程序"><a class="header" href="#下载程序">下载程序</a></h3>
-<p>首先我们需要下载适用于本机的 Clash 发行版。我们在 <a href="https://github.com/Dreamacro/clash/releases">Clash 的发布页</a> 找到对应机器平台的构建，比如 TX2 上运行的是 Linux for Tegra(L4T)，其处理器架构为 ARM，因此我们下载文件名种有 <code>linux-armv8</code> 字样的压缩包。</p>
-<p>笔者书写文章时，最新版本为 1.8.0，因此我们下载名为 <code>clash-linux-armv8-v1.8.0.gz</code> 的文件（压缩包）。</p>
-<p>之后，解压软件的压缩包，得到可执行程序文件。由于我们下载的为适用于 Linux 系统 + ARMv8 架构的二进制程序，因此可执行程序的名字为 <code>clash-linux-armv8</code>。</p>
-<blockquote>
-<p>注意：由于大部分情况下，下载过程本身需要相应的网络条件，建议先在具备网络条件的环境下载好软件后，将软件复制到 TX2 上，可以使用 U 盘也可以使用 <code>scp</code>（如果 USB 接口比较紧缺）。</p>
-</blockquote>
-<p>新建一个名为 <code>clash</code> 的目录，将解压得到的文件放入 <code>clash</code> 目录下。</p>
-<p>这里假设 <code>clash</code> 目录位于用户目录下，则最终可执行文件将位于 <code>~/clash/</code> 中。</p>
-<p>接着，进入 <code>clash</code> 目录，并为可执行程序添加执行权限。</p>
-<pre><code class="language-console">$ cd ~/clash/
-$ chmod +x clash-linux-armv8
-</code></pre>
-<p>为了方便使用，可以对可执行文件的名字进行更改。这里我们将其名称修改为 <code>clash</code>。</p>
-<pre><code class="language-console">$ mv clash-linux-armv8 clash
-</code></pre>
-<h3 id="获取配置文件"><a class="header" href="#获取配置文件">获取配置文件</a></h3>
-<p>接下来，我们需要将从订阅链接获得到的 Clash 配置文件，放入同目录下。</p>
-<p>一种方法是直接在浏览器中访问订阅链接，在打开的页面的上下文菜单选择“另存为”，将得到的内容保存为 <code>config.yaml</code> 并存储在 <code>clash</code> 目录下。</p>
-<blockquote>
-<p>如果是使用 SSH 远程连接的情况，直接在主机上全选网页内容，复制到粘贴板；之后在对应位置新建 <code>config.yaml</code> 文件，再使用 <code>vi</code> 或 <code>vim</code> 等编辑器将内容粘贴到文件中。</p>
-</blockquote>
-<p>另一种方法是使用 <code>wget</code> 命令获取订阅链接的内容。建议将订阅链接包含于一对引号 <code>''</code> 中，以便 shell 程序将其视作一个整体。</p>
-<pre><code class="language-console">$ cd ~/.config/clash/
-$ wget -O config.yaml '订阅链接'
-</code></pre>
-<figure>
-<p><img src="https://mxwljsq.com/theme/malio/img/tutorial/linux-clash-2.jpg" alt="在终端中使用 wget 命令获取订阅链接的内容" /></p>
-<figcaption>在终端中使用 wget 命令获取订阅链接的内容</figcaption>
-</figure>
-<blockquote>
-<p>此外，也可以将配置文件置于用户目录下的配置文件夹中，即 <code>~/.config/clash/</code> 目录下。如果目录不存在，需要先创建对应目录。</p>
-</blockquote>
-<h3 id="运行-clash-程序"><a class="header" href="#运行-clash-程序">运行 clash 程序</a></h3>
-<p>之后，在终端中执行 Clash 可执行程序即可：</p>
-<pre><code class="language-console">$ cd ~/clash/
-$ ./clash -d .
-</code></pre>
-<p>也可以在后台执行 Clash 程序（详见 <a href="https://tsagaanbar.github.io/Newly-Programmer-ABC/begin-programming/cli/common-commands.html#%E4%BB%BB%E5%8A%A1%E6%8E%A7%E5%88%B6">bash 作业控制</a>）：</p>
-<pre><code class="language-console">$ cd ~/clash/
-$ ./clash -d . &amp;
-</code></pre>
-<blockquote>
-<p>如果在上一步中将配置文件置于 <code>~/.config/clash/</code> 下，则可以直接启动 Clash 程序而无需额外的参数：</p>
-<pre><code class="language-console">$ ~/clash/clash
-</code></pre>
-</blockquote>
-<p>启动程序后，可以访问 <a href="http://clash.razord.top/">Clash Dashboard</a> 进行切换节点、测延迟等操作。</p>
-<h3 id="使用代理"><a class="header" href="#使用代理">使用代理</a></h3>
-<p>程序启动后，默认侦听本机的 7890 端口，也就是 <code>127.0.0.1:7890</code>。我们将程序的网络请求转发到这个位置，就能实现代理了。</p>
-<p>比如，我们新建一个终端，在该次会话中增加 <code>http_proxy</code> 和 <code>https_proxy</code> 两个环境变量：</p>
-<pre><code class="language-console">$ export http_proxy='http://127.0.0.1:7890'
-$ export https_proxy='http://127.0.0.1:7890'
-</code></pre>
-<p>之后，再在这个终端中启动程序（比如 <code>git clone</code> 或者 <code>firefox</code>），一般就会使用到相应的代理配置了。</p>
-<pre><code class="language-console">$ git clone 仓库链接
-</code></pre>
-<p>此外，也可以将其<strong>设置为系统代理</strong>。以 Ubuntu 系统为例，打开系统设置，选择网络，点击网络代理右边的 <kbd>⚙</kbd> 按钮，选择手动，填写 HTTP 和 HTTPS 代理为 <code>127.0.0.1:7890</code>，填写 Socks 主机为 <code>127.0.0.1:7891</code>，即可启用系统代理。</p>
-<figure>
-<p><img src="https://mxwljsq.com/theme/malio/img/tutorial/linux-clash-5.jpg" alt="在 Ubuntu 的图形化设置界面中配置代理" /></p>
-<figcaption>在 Ubuntu 的图形化设置界面中配置代理</figcaption>
-</figure>
-<p>当不再使用代理时，可以在 clash 运行的终端里按下 <kbd>Control</kbd> + <kbd>C</kbd> 以退出程序。程序结束后，需要记得取消系统代理，不然会出现无法正常访问网络的情况。</p>
-<h2 id="规则代理"><a class="header" href="#规则代理">规则代理</a></h2>
-<p>（未完待续）</p>
-<h2 id="使用局域网内其他机器上的代理"><a class="header" href="#使用局域网内其他机器上的代理">使用局域网内其他机器上的代理</a></h2>
-<p>（未完待续）</p>
-<h2 id="参考链接"><a class="header" href="#参考链接">参考链接</a></h2>
-<ul>
-<li><a href="https://mxwljsq.com/user/tutorial?os=linux&amp;client=clash">https://mxwljsq.com/user/tutorial?os=linux&amp;client=clash</a></li>
-</ul>
+<p>读者可能已经使用过类似 <a href="https://github.com/Fndroid/clash_for_windows_pkg">Clash for Windows</a> 这样的图形化软件. Clash 本身是一款 CLI 程序 (命令行界面程序), 不过有很多应用程序基于其设计了易于使用的图形界面程序.</p>
+<p>但是出于各种原因, 笔者并不推荐使用 Clash 及其衍生的各种软件.</p>
+<p>因此将原文内容删除, 并将于之后更新另外的方法.</p>
 
                     </main>
 
