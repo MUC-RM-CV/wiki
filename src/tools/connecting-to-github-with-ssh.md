@@ -62,14 +62,14 @@ SSH 以 **非对称加密** 实现身份验证. 身份验证其实有多种途�
 
 ### 创建 SSH 密钥
 
-Windows 上的 Git for Windows 已经包含了 OpenSSH. 其他操作系统在安装了 `git` 之后应当也随之安装了相应的依赖.
+Windows 上的 Git for Windows 已经包含了 OpenSSH. 其他操作系统则可能需要手动安装 `openssh` 软件包.
 
 下边以 Windows 上使用 Git for Windows 为例, 介绍创建密钥的过程. 其他操作系统应当与 Git Bash 的操作过程类似.
 
-使用 `ssh-keygen` 命令创建密钥 (注意替换为自己在 GitHub 上的电子邮件地址). 这里使用的是 RSA 算法; 可以选用其它的算法, 则命令和生成的文件名会有不同.
+使用 `ssh-keygen` 命令创建密钥 (注意替换为自己在 GitHub 上的电子邮件地址). 这里选用的是 ED25519 算法; 若选用其它的算法, 则命令和生成的文件名会有不同.
 
 ```
-$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+$ ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
 之后会提示选择密钥存储的路径; 为了方便, 建议 **使用默认的路径**, 直接按回车即可:
