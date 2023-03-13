@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: mdBook build
+name: mdBook build & deploy
 
 # Controls when the workflow will run
 on:
@@ -28,9 +28,40 @@ jobs:
 
       - run: mdbook build
 
-      - name: Deploy
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v0
+        with:
+          path: ./book
+
+      # Still deploy to branch for compatibility with other services
+      # Remember to change the setting to deploying from "GitHub Action" (Beta)
+      # at https://github.com/${USER}/${REPO}/settings/pages
+      - name: Still push to branch "gh-pages" (for compatibility)
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./book
           publish_branch: gh-pages
+
+  # Deploy job
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
